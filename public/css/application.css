@@ -7,6 +7,10 @@
     background: #eee; }
 .container .tab-build .tab-input {
   margin: 20px 0; }
+  .container .tab-build .tab-input fieldset label.name {
+    width: 20px; }
+  .container .tab-build .tab-input fieldset .string-input {
+    width: 30px; }
   .container .tab-build .tab-input #tab-preview {
     display: inline-block;
     font-family: 'courier';

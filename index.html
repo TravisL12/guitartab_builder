@@ -36,20 +36,29 @@
 
         <div class="tab-input row">
           <fieldset class="col-md-4">
-            <label>String:</label><br>
-            <input class="string-input" placeholder="2456" ng-model="string.input" maxlength="6"></input><br>
-            <label>Fret:</label><br>
-            <input class="fret-input" placeholder="123X" ng-model="fret.input" maxlength="6"></input>
+            <label>String:</label>
+            <br><label class="name">e: </label>
+            <input class="string-input" placeholder="0" ng-model="string.input_eH" maxlength="2"></input>
+            <br><label class="name">B: </label>
+            <input class="string-input" placeholder="1" ng-model="string.input_b" maxlength="2"></input>
+            <br><label class="name">G: </label>
+            <input class="string-input" placeholder="0" ng-model="string.input_g" maxlength="2"></input>
+            <br><label class="name">D: </label>
+            <input class="string-input" placeholder="2" ng-model="string.input_d" maxlength="2"></input>
+            <br><label class="name">A: </label>
+            <input class="string-input" placeholder="3" ng-model="string.input_a" maxlength="2"></input>
+            <br><label class="name">E: </label>
+            <input class="string-input" placeholder="X" ng-model="string.input_eL" maxlength="2"></input>
           </fieldset>
 
           <ul id='tab-preview' class="col-md-4">
             <li>Chord Preview:</li>
-            <li>e|--{{string.input[0]}}--</li>
-            <li>B|--{{string.input[1]}}--</li>
-            <li>G|--{{string.input[2]}}--</li>
-            <li>D|--{{string.input[3]}}--</li>
-            <li>A|--{{string.input[4]}}--</li>
-            <li>E|--{{string.input[5]}}--</li>
+            <li>e|--{{string.input_eH}}--</li>
+            <li>B|--{{string.input_b}}--</li>
+            <li>G|--{{string.input_g}}--</li>
+            <li>D|--{{string.input_d}}--</li>
+            <li>A|--{{string.input_a}}--</li>
+            <li>E|--{{string.input_eL}}--</li>
           </ul>
         </div>
 

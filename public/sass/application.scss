@@ -9,7 +9,10 @@
   .tab-build{
     .tab-input{
       margin: 20px 0;
-      fieldset{ }
+      fieldset{
+        label.name{ width: 20px;}
+        .string-input{ width: 30px; }
+      }
       #tab-preview{
         display: inline-block;
         font-family: 'courier';
