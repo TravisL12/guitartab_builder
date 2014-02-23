@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Guitar Demo</title>
+  <link rel="stylesheet" type="text/css" href="public/css/application.css">
+  <link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
+
+  <script src="public/js/angular.min.js"></script>
+  <script src="public/js/jquery-2.0.3.min.js"></script>
+  <script src="public/js/application.js"></script>
+  <script src="public/js/chords.js"></script>
+</head>
+
+<body>
+
+  <div ng-app="guitarApp">
+    <div class="container row-fluid" ng-controller="ChordCtrl">
+
+      <div class="search col-md-3">
+        <label>Chord Search</label><br>
+        <input type="text" ng-model="searchChords.name">
+        <table>
+          <tr>
+            <td width="60px">Name:</td>
+            <td>Chord:</td>
+          </tr>
+          <tr ng-repeat="chord in chords.tabs | filter:searchChords">
+            <td width="60px">{{chord.name}}</td>
+            <td>{{chord.tab}}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="tab-build col-md-9" ng-controller="TabCtrl">
+        <h1>Build a Tab!</h1>
+
+        <div class="tab-input row">
+          <fieldset class="col-md-4">
+            <label>String:</label><br>
+            <input class="string-input" placeholder="2456" ng-model="string.input" maxlength="6"></input><br>
+            <label>Fret:</label><br>
+            <input class="fret-input" placeholder="123X" ng-model="fret.input" maxlength="6"></input>
+          </fieldset>
+
+          <ul id='tab-preview' class="col-md-4">
+            <li>Chord Preview:</li>
+            <li>e|--{{string.input[0]}}--</li>
+            <li>B|--{{string.input[1]}}--</li>
+            <li>G|--{{string.input[2]}}--</li>
+            <li>D|--{{string.input[3]}}--</li>
+            <li>A|--{{string.input[4]}}--</li>
+            <li>E|--{{string.input[5]}}--</li>
+          </ul>
+        </div>
+
+        <div class="tab-body">
+          <ul id='base-notes'>
+            <li>e|{{spacing}}</li>
+            <li>B|{{spacing}}</li>
+            <li>G|{{spacing}}</li>
+            <li>D|{{spacing}}</li>
+            <li>A|{{spacing}}</li>
+            <li>E|{{spacing}}</li>
+          </ul>
+
+          <ul class="user-tab" ng-repeat='tab in tabs'>
+            <li>{{tab.eH}}{{spacing}}</li>
+            <li>{{tab.b}}{{spacing}}</li>
+            <li>{{tab.g}}{{spacing}}</li>
+            <li>{{tab.d}}{{spacing}}</li>
+            <li>{{tab.a}}{{spacing}}</li>
+            <li>{{tab.eL}}{{spacing}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
