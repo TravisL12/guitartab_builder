@@ -82,7 +82,8 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
     $scope.tabs = [];
   }
 
-  $scope.addTab = function(item){
+  $scope.addTab = function(item, break_ct){
+    if(!$scope.break_ct) $scope.break_ct = break_ct
     if(item === 'measure'){
       $scope.tabs.push({eH: '|',b: '|',g: '|',d: '|',a: '|',eL:'|'})
     }else if(item === 'chord' && $scope.stringInput !== {}){
@@ -94,6 +95,7 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
         a:  $scope.stringInput['a'],
         eL: $scope.stringInput['eL']
       });
+      $scope.spacerCt($scope.break_ct)
     }
     $scope.resetStrings();
     return;

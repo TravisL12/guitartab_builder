@@ -29,12 +29,15 @@
           margin: 0;
           padding: 0;
           list-style: none;
+          label{
+            padding-left: 10px;
+          }
           button{
             margin: 10px 0;
             width: 120px;
           }
           .break-ct{
-            width: 30px;
+            width: 40px;
           }
         }
       }

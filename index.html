@@ -35,33 +35,33 @@
 
         <div class="tab-input row">
           <div class="col-md-2">
-            <label class="str-name">Chord Name:</label><br>
+            <label class="str-name">Chord:</label><br>
             <input class="chord-input" ng-keypress='pressEnter($event)' placeholder="C" ng-model="chord" maxlength="6"></input>
           </div>
 
           <fieldset class="col-md-2">
             <label class="str-name">Strings:</label><br>
             <label class="str-name">e: </label>
-            <input ng-keypress='pressEnter($event)' class="string-input" placeholder="0" ng-model="string_eH" maxlength="2"></input>
+            <input type="text" ng-keypress='pressEnter($event)' class="string-input" placeholder="0" ng-model="string_eH" maxlength="2"></input>
             <br>
             <label class="str-name">B: </label>
-            <input ng-keypress='pressEnter($event)' class="string-input" placeholder="1" ng-model="string_b" maxlength="2"></input>
+            <input type="text" ng-keypress='pressEnter($event)' class="string-input" placeholder="1" ng-model="string_b" maxlength="2"></input>
             <br>
             <label class="str-name">G: </label>
-            <input ng-keypress='pressEnter($event)' class="string-input" placeholder="0" ng-model="string_g" maxlength="2"></input>
+            <input type="text" ng-keypress='pressEnter($event)' class="string-input" placeholder="0" ng-model="string_g" maxlength="2"></input>
             <br>
             <label class="str-name">D: </label>
-            <input ng-keypress='pressEnter($event)' class="string-input" placeholder="2" ng-model="string_d" maxlength="2"></input>
+            <input type="text" ng-keypress='pressEnter($event)' class="string-input" placeholder="2" ng-model="string_d" maxlength="2"></input>
             <br>
             <label class="str-name">A: </label>
-            <input ng-keypress='pressEnter($event)' class="string-input" placeholder="3" ng-model="string_a" maxlength="2"></input>
+            <input type="text" ng-keypress='pressEnter($event)' class="string-input" placeholder="3" ng-model="string_a" maxlength="2"></input>
             <br>
             <label class="str-name">E: </label>
-            <input ng-keypress='pressEnter($event)' class="string-input" placeholder="X" ng-model="string_eL" maxlength="2"></input>
+            <input type="text" ng-keypress='pressEnter($event)' class="string-input" placeholder="X" ng-model="string_eL" maxlength="2"></input>
           </fieldset>
 
           <div class="tab-preview col-md-8">
-            <ul id="chord-prev" class="col-md-6">
+            <ul id="chord-prev" class="col-md-5">
               <li>Chord Preview:</li>
               <li>e|--<span class="prev-note">{{note(nameTab[5], string_eH, 'eH')}}</span>--</li>
               <li>B|--<span class="prev-note">{{note(nameTab[4], string_b,  'b')}}</span>--</li>
@@ -70,14 +70,14 @@
               <li>A|--<span class="prev-note">{{note(nameTab[1], string_a,  'a')}}</span>--</li>
               <li>E|--<span class="prev-note">{{note(nameTab[0], string_eL, 'eL')}}</span>--</li>
             </ul>
-            <ul id="buttons" class="col-md-6">
-              <li><button id="add-tab" disabled='disabled' ng-click="addTab('chord')">Add Tab!</button></li>
-              <li><button id="add-break" ng-click="spacerCt(breakCt)">Add Break!</button>
-                <input class="break-ct" value="2" ng-model="breakCt" maxlength="2"><label>Count</label>
-              </li>
-              <li><button id="add-meas" ng-click="addTab('measure')">Add Measure!</button></li>
+            <fieldset id="buttons" class="col-md-7">
+              <button id="add-tab"  ng-click="addTab('chord', breakCt)">Add Tab!</button>
+              <label>(Enter)</label>
+              <button id="add-break" ng-click="spacerCt(breakCt)">Add Break!</button>
+              <input class="break-ct" type="text" value="2" ng-model="breakCt" maxlength="2"><label>Count</label>
+              <button id="add-meas" ng-click="addTab('measure')">Add Measure!</button>
               <li><button id="reset" ng-click="resetAll()">Reset!</button></li>
-            </ul>
+            </fieldset>
           </div>
 
         </div>
@@ -93,12 +93,12 @@
           </ul>
 
           <ul class="user-tab" ng-repeat='tab in tabs'>
-            <li>{{tab.eH}}{{spacing()}}</li>
-            <li>{{tab.b}}{{spacing()}}</li>
-            <li>{{tab.g}}{{spacing()}}</li>
-            <li>{{tab.d}}{{spacing()}}</li>
-            <li>{{tab.a}}{{spacing()}}</li>
-            <li>{{tab.eL}}{{spacing()}}</li>
+            <li>{{tab.eH}}</li>
+            <li>{{tab.b}}</li>
+            <li>{{tab.g}}</li>
+            <li>{{tab.d}}</li>
+            <li>{{tab.a}}</li>
+            <li>{{tab.eL}}</li>
           </ul>
         </div>
       </div>
