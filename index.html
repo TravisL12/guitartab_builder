@@ -16,69 +16,89 @@
   <div ng-app="guitarApp">
     <div class="container row-fluid" ng-controller="ChordCtrl">
 
-      <div class="search col-md-3">
+      <div class="search col-md-2">
         <label>Chord Search</label><br>
-        <input type="text" ng-model="searchChords.name">
         <table>
           <tr>
             <td width="60px">Name:</td>
             <td>Chord:</td>
           </tr>
-          <tr ng-repeat="chord in chords.tabs | filter:searchChords">
+          <tr ng-repeat="chord in chordLib.tabs | filter:chord">
             <td width="60px">{{chord.name}}</td>
             <td>{{chord.tab}}</td>
           </tr>
         </table>
       </div>
 
-      <div class="tab-build col-md-9" ng-controller="TabCtrl">
+      <div class="tab-build col-md-9">
         <h1>Build a Tab!</h1>
 
         <div class="tab-input row">
-          <fieldset class="col-md-4">
-            <label>String:</label>
-            <br><label class="name">e: </label>
-            <input class="string-input" placeholder="0" ng-model="string.input_eH" maxlength="2"></input>
-            <br><label class="name">B: </label>
-            <input class="string-input" placeholder="1" ng-model="string.input_b" maxlength="2"></input>
-            <br><label class="name">G: </label>
-            <input class="string-input" placeholder="0" ng-model="string.input_g" maxlength="2"></input>
-            <br><label class="name">D: </label>
-            <input class="string-input" placeholder="2" ng-model="string.input_d" maxlength="2"></input>
-            <br><label class="name">A: </label>
-            <input class="string-input" placeholder="3" ng-model="string.input_a" maxlength="2"></input>
-            <br><label class="name">E: </label>
-            <input class="string-input" placeholder="X" ng-model="string.input_eL" maxlength="2"></input>
+          <div class="col-md-2">
+            <label class="str-name">Chord Name:</label><br>
+            <input class="chord-input" ng-keypress='pressEnter($event)' placeholder="C" ng-model="chord" maxlength="6"></input>
+          </div>
+
+          <fieldset class="col-md-2">
+            <label class="str-name">Strings:</label><br>
+            <label class="str-name">e: </label>
+            <input ng-keypress='pressEnter($event)' class="string-input" placeholder="0" ng-model="string_eH" maxlength="2"></input>
+            <br>
+            <label class="str-name">B: </label>
+            <input ng-keypress='pressEnter($event)' class="string-input" placeholder="1" ng-model="string_b" maxlength="2"></input>
+            <br>
+            <label class="str-name">G: </label>
+            <input ng-keypress='pressEnter($event)' class="string-input" placeholder="0" ng-model="string_g" maxlength="2"></input>
+            <br>
+            <label class="str-name">D: </label>
+            <input ng-keypress='pressEnter($event)' class="string-input" placeholder="2" ng-model="string_d" maxlength="2"></input>
+            <br>
+            <label class="str-name">A: </label>
+            <input ng-keypress='pressEnter($event)' class="string-input" placeholder="3" ng-model="string_a" maxlength="2"></input>
+            <br>
+            <label class="str-name">E: </label>
+            <input ng-keypress='pressEnter($event)' class="string-input" placeholder="X" ng-model="string_eL" maxlength="2"></input>
           </fieldset>
 
-          <ul id='tab-preview' class="col-md-4">
-            <li>Chord Preview:</li>
-            <li>e|--{{string.input_eH}}--</li>
-            <li>B|--{{string.input_b}}--</li>
-            <li>G|--{{string.input_g}}--</li>
-            <li>D|--{{string.input_d}}--</li>
-            <li>A|--{{string.input_a}}--</li>
-            <li>E|--{{string.input_eL}}--</li>
-          </ul>
+          <div class="tab-preview col-md-8">
+            <ul id="chord-prev" class="col-md-6">
+              <li>Chord Preview:</li>
+              <li>e|--<span class="prev-note">{{note(nameTab[5], string_eH, 'eH')}}</span>--</li>
+              <li>B|--<span class="prev-note">{{note(nameTab[4], string_b,  'b')}}</span>--</li>
+              <li>G|--<span class="prev-note">{{note(nameTab[3], string_g,  'g')}}</span>--</li>
+              <li>D|--<span class="prev-note">{{note(nameTab[2], string_d,  'd')}}</span>--</li>
+              <li>A|--<span class="prev-note">{{note(nameTab[1], string_a,  'a')}}</span>--</li>
+              <li>E|--<span class="prev-note">{{note(nameTab[0], string_eL, 'eL')}}</span>--</li>
+            </ul>
+            <ul id="buttons" class="col-md-6">
+              <li><button id="add-tab" disabled='disabled' ng-click="addTab('chord')">Add Tab!</button></li>
+              <li><button id="add-break" ng-click="spacerCt(breakCt)">Add Break!</button>
+                <input class="break-ct" value="2" ng-model="breakCt" maxlength="2"><label>Count</label>
+              </li>
+              <li><button id="add-meas" ng-click="addTab('measure')">Add Measure!</button></li>
+              <li><button id="reset" ng-click="resetAll()">Reset!</button></li>
+            </ul>
+          </div>
+
         </div>
 
         <div class="tab-body">
           <ul id='base-notes'>
-            <li>e|{{spacing}}</li>
-            <li>B|{{spacing}}</li>
-            <li>G|{{spacing}}</li>
-            <li>D|{{spacing}}</li>
-            <li>A|{{spacing}}</li>
-            <li>E|{{spacing}}</li>
+            <li>e|{{spacing()}}</li>
+            <li>B|{{spacing()}}</li>
+            <li>G|{{spacing()}}</li>
+            <li>D|{{spacing()}}</li>
+            <li>A|{{spacing()}}</li>
+            <li>E|{{spacing()}}</li>
           </ul>
 
           <ul class="user-tab" ng-repeat='tab in tabs'>
-            <li>{{tab.eH}}{{spacing}}</li>
-            <li>{{tab.b}}{{spacing}}</li>
-            <li>{{tab.g}}{{spacing}}</li>
-            <li>{{tab.d}}{{spacing}}</li>
-            <li>{{tab.a}}{{spacing}}</li>
-            <li>{{tab.eL}}{{spacing}}</li>
+            <li>{{tab.eH}}{{spacing()}}</li>
+            <li>{{tab.b}}{{spacing()}}</li>
+            <li>{{tab.g}}{{spacing()}}</li>
+            <li>{{tab.d}}{{spacing()}}</li>
+            <li>{{tab.a}}{{spacing()}}</li>
+            <li>{{tab.eL}}{{spacing()}}</li>
           </ul>
         </div>
       </div>

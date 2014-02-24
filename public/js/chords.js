@@ -131,8 +131,7 @@
     {name: 'Gm6',    tab: 'XX2333'},
     {name: 'Gm7',    tab: '353333'},
     {name: 'Gmaj7',  tab: '320002'},
-    {name: 'Gsus',   tab: 'XX0013'},
-    {name: 'Measure',tab: '||||||'}
+    {name: 'Gsus',   tab: 'XX0013'}
     ];
 
     return ChordLibrary;

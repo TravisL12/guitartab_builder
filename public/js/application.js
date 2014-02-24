@@ -1,19 +1,101 @@
 var guitarApp = angular.module('guitarApp', []);
 
-guitarApp.controller('ChordCtrl', function($scope, ChordLibrary){
-  $scope.chords = ChordLibrary;
-})
+guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function($scope, ChordLibrary, $filter){
 
+  var findTab = function(input){
+    for(var i=0;i<ChordLibrary.tabs.length; i++){
+      if(input === ChordLibrary.tabs[i].name){
+        return ChordLibrary.tabs[i].tab;
+      }
+    }
+  }
 
-guitarApp.controller('TabCtrl', function($scope, ChordLibrary){
+  $scope.pressEnter = function(e) {
+    if(e.which==13){ $scope.addTab('chord') };
+  }
+
   var spacer = "-"
-  var spacerCt = 3;
+  $scope.spacing = function(amount){
+    if(!amount){var amount = 1;}
+    return new Array(amount + 1).join(spacer);
+  }
 
-  $scope.spacing = new Array(spacerCt + 1).join(spacer);
-  $scope.tabs = [
-  { eH: '0',b: '1',g: '0',d: '2',a: '3',eL: 'X' },
-  { eH: '2',b: '3',g: '2',d: '0',a: '0',eL: 'X' },
-  { eH: '0',b: '0',g: '1',d: '2',a: '2',eL: '0' },
-  { eH: '1',b: '1',g: '2',d: '3',a: '3',eL: '1' },
-  ]
-})
+  $scope.chordLib = ChordLibrary;
+  $scope.tabs = [];
+  $scope.stringInput = {}
+  $scope.chord = '';
+
+  $scope.$watch('chord', function() {
+    $scope.stringInput = {};
+    $scope.nameTab = findTab($scope.chord);
+  });
+
+  $scope.$watchCollection('[string_eH,string_b,string_g,string_d,string_a,string_eL]', function() {
+    $scope.chord = '';
+  }, true);
+
+  $scope.spacerCt = function(amount){
+    var amount = parseInt(amount);
+    $scope.tabs.push({
+      eH: $scope.spacing(amount),
+      b:  $scope.spacing(amount),
+      g:  $scope.spacing(amount),
+      d:  $scope.spacing(amount),
+      a:  $scope.spacing(amount),
+      eL: $scope.spacing(amount)})
+  }
+
+  $scope.note = function(chord, string, name){
+    if(chord){
+      $('#add-tab').attr('disabled', false)
+      $scope.stringInput[name] = chord;
+      return chord;
+    }else if(string){
+      $('#add-tab').attr('disabled', false)
+      if(string === '0'){
+        $scope.stringInput[name] = string;
+        return string;
+      }
+      string = string.replace(/^0/g,'');
+      $scope.stringInput[name] = string;
+      return string;
+    }else{
+      $scope.stringInput[name] = spacer;
+      return spacer;
+    }
+  }
+
+  $scope.resetStrings = function(){
+    $('#add-tab').attr('disabled', true)
+    $scope.stringInput = {};
+    $scope.chord = '';
+    $scope.string_eH   = '';
+    $scope.string_b    = '';
+    $scope.string_g    = '';
+    $scope.string_d    = '';
+    $scope.string_a    = '';
+    $scope.string_eL   = '';
+  }
+
+  $scope.resetAll = function(){
+    $scope.resetStrings();
+    $scope.tabs = [];
+  }
+
+  $scope.addTab = function(item){
+    if(item === 'measure'){
+      $scope.tabs.push({eH: '|',b: '|',g: '|',d: '|',a: '|',eL:'|'})
+    }else if(item === 'chord' && $scope.stringInput !== {}){
+      $scope.tabs.push({
+        eH: $scope.stringInput['eH'],
+        b:  $scope.stringInput['b'],
+        g:  $scope.stringInput['g'],
+        d:  $scope.stringInput['d'],
+        a:  $scope.stringInput['a'],
+        eL: $scope.stringInput['eL']
+      });
+    }
+    $scope.resetStrings();
+    return;
+  }
+}])

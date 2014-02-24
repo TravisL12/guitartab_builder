@@ -1,32 +1,49 @@
 .container .search {
-  border-right: 1px solid #000;
   height: 100%; }
   .container .search tr:nth-child(even) {
     background: #ddd; }
   .container .search tr:nth-child(odd) {
     background: #eee; }
-.container .tab-build .tab-input {
-  margin: 20px 0; }
-  .container .tab-build .tab-input fieldset label.name {
-    width: 20px; }
-  .container .tab-build .tab-input fieldset .string-input {
-    width: 30px; }
-  .container .tab-build .tab-input #tab-preview {
-    display: inline-block;
-    font-family: 'courier';
-    margin: 0;
-    padding: 0;
-    list-style: none; }
-.container .tab-build .tab-body {
-  min-width: 800px;
-  min-height: 800px;
-  border: 1px solid #000;
-  padding: 20px; }
-  .container .tab-build .tab-body #base-notes, .container .tab-build .tab-body .user-tab {
-    display: inline-block;
-    font-family: 'courier';
-    margin: 0;
-    padding: 0;
-    list-style: none; }
-  .container .tab-build .tab-body .user-tab {
-    padding: 0; }
+.container .tab-build {
+  border-left: 1px solid #000; }
+  .container .tab-build .tab-input {
+    margin: 20px 0; }
+    .container .tab-build .tab-input .chord-input {
+      width: 60px; }
+    .container .tab-build .tab-input fieldset label.str-name {
+      width: 20px; }
+    .container .tab-build .tab-input fieldset .string-input {
+      width: 30px; }
+    .container .tab-build .tab-input .tab-preview {
+      display: inline-block; }
+      .container .tab-build .tab-input .tab-preview #chord-prev {
+        text-align: center;
+        display: inline-block;
+        font-family: 'courier';
+        margin: 0;
+        padding: 0;
+        list-style: none; }
+        .container .tab-build .tab-input .tab-preview #chord-prev .prev-note {
+          color: #f00; }
+      .container .tab-build .tab-input .tab-preview #buttons {
+        margin: 0;
+        padding: 0;
+        list-style: none; }
+        .container .tab-build .tab-input .tab-preview #buttons button {
+          margin: 10px 0;
+          width: 120px; }
+        .container .tab-build .tab-input .tab-preview #buttons .break-ct {
+          width: 30px; }
+  .container .tab-build .tab-body {
+    min-width: 800px;
+    min-height: 800px;
+    border: 1px solid #000;
+    padding: 20px; }
+    .container .tab-build .tab-body #base-notes, .container .tab-build .tab-body .user-tab {
+      display: inline-block;
+      font-family: 'courier';
+      margin: 0;
+      padding: 0;
+      list-style: none; }
+    .container .tab-build .tab-body .user-tab {
+      padding: 0; }

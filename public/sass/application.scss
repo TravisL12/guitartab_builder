@@ -1,24 +1,42 @@
 .container{
   .search{
-    border-right: 1px solid #000;
     height: 100%;
     tr:nth-child(even){ background: #ddd; }
     tr:nth-child(odd){ background: #eee; }
   }
 
   .tab-build{
+    border-left: 1px solid #000;
     .tab-input{
       margin: 20px 0;
+      .chord-input{ width: 60px; }
       fieldset{
-        label.name{ width: 20px;}
+        label.str-name{ width: 20px;}
         .string-input{ width: 30px; }
       }
-      #tab-preview{
+      .tab-preview{
         display: inline-block;
-        font-family: 'courier';
-        margin: 0;
-        padding: 0;
-        list-style: none;
+        #chord-prev{
+          text-align: center;
+          display: inline-block;
+          font-family: 'courier';
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          .prev-note{ color: #f00;}
+        }
+        #buttons{
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          button{
+            margin: 10px 0;
+            width: 120px;
+          }
+          .break-ct{
+            width: 30px;
+          }
+        }
       }
     }
 
