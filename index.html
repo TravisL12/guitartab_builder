@@ -36,47 +36,37 @@
         <div class="tab-input row">
           <div class="col-md-2">
             <label class="str-name">Chord:</label><br>
-            <input class="chord-input" ng-keypress='pressEnter($event)' placeholder="C" ng-model="chord" maxlength="6"></input>
+            <input class="chord-input" ng-keypress='pressEnter($event)' ng-model="chord" maxlength="6"></input>
           </div>
 
           <fieldset class="col-md-2">
             <label class="str-name">Strings:</label><br>
             <label class="str-name">e: </label>
-            <input type="text" ng-keypress='pressEnter($event)' class="string-input" placeholder="0" ng-model="string_eH" maxlength="2"></input>
+            <input type="text" ng-keypress='pressEnter($event)' class="string-input" ng-model="stringInput['eH']" maxlength="2"></input>
             <br>
             <label class="str-name">B: </label>
-            <input type="text" ng-keypress='pressEnter($event)' class="string-input" placeholder="1" ng-model="string_b" maxlength="2"></input>
+            <input type="text" ng-keypress='pressEnter($event)' class="string-input" ng-model="stringInput['b']" maxlength="2"></input>
             <br>
             <label class="str-name">G: </label>
-            <input type="text" ng-keypress='pressEnter($event)' class="string-input" placeholder="0" ng-model="string_g" maxlength="2"></input>
+            <input type="text" ng-keypress='pressEnter($event)' class="string-input" ng-model="stringInput['g']" maxlength="2"></input>
             <br>
             <label class="str-name">D: </label>
-            <input type="text" ng-keypress='pressEnter($event)' class="string-input" placeholder="2" ng-model="string_d" maxlength="2"></input>
+            <input type="text" ng-keypress='pressEnter($event)' class="string-input" ng-model="stringInput['d']" maxlength="2"></input>
             <br>
             <label class="str-name">A: </label>
-            <input type="text" ng-keypress='pressEnter($event)' class="string-input" placeholder="3" ng-model="string_a" maxlength="2"></input>
+            <input type="text" ng-keypress='pressEnter($event)' class="string-input" ng-model="stringInput['a']" maxlength="2"></input>
             <br>
             <label class="str-name">E: </label>
-            <input type="text" ng-keypress='pressEnter($event)' class="string-input" placeholder="X" ng-model="string_eL" maxlength="2"></input>
+            <input type="text" ng-keypress='pressEnter($event)' class="string-input" ng-model="stringInput['eL']" maxlength="2"></input>
           </fieldset>
 
           <div class="tab-preview col-md-8">
-            <ul id="chord-prev" class="col-md-5">
-              <li>Chord Preview:</li>
-              <li>e|--<span class="prev-note">{{note(nameTab[5], string_eH, 'eH')}}</span>--</li>
-              <li>B|--<span class="prev-note">{{note(nameTab[4], string_b,  'b')}}</span>--</li>
-              <li>G|--<span class="prev-note">{{note(nameTab[3], string_g,  'g')}}</span>--</li>
-              <li>D|--<span class="prev-note">{{note(nameTab[2], string_d,  'd')}}</span>--</li>
-              <li>A|--<span class="prev-note">{{note(nameTab[1], string_a,  'a')}}</span>--</li>
-              <li>E|--<span class="prev-note">{{note(nameTab[0], string_eL, 'eL')}}</span>--</li>
-            </ul>
             <fieldset id="buttons" class="col-md-7">
-
               <button id="add-tab"  ng-click="addTab('chord')">Add Tab!</button>
               <label>(Enter)</label>
 
-              <button id="add-break" ng-click="spacerCt(breakCt)">Add Break!</button>
-              <input class="break-ct" type="number" value="2" ng-model="breakCt" maxlength="2">
+              <button id="add-break" ng-click="addTab('break')">Add Break!</button>
+              <input class="break-ct" min='0' max='30' type="number" value="2" ng-model="breakCt" maxlength="2">
               <label>Count</label>
 
               <button id="add-meas" ng-click="addTab('measure')">Add Measure!</button>
