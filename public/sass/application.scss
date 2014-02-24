@@ -58,7 +58,10 @@
       .user-tab{
         @extend #base-notes;
         padding: 0;
-        li{}
+        border: 1px solid transparent;
+        &:hover{
+          border: 1px solid #0f0;
+        }
       }
     }
   }

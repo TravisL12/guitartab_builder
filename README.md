@@ -6,3 +6,4 @@
 1. Add Author line
 1. Clean Line-breaks with guitar strings reference
 1. Output to Text file
+1. Edit Chords/Tabs submitted
