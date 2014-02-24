@@ -16,7 +16,7 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
 
   var spacer = "-"
   $scope.spacing = function(amount){
-    if(!amount){var amount = 1;}
+    if(!amount){var amount = 4;}
     return new Array(amount + 1).join(spacer);
   }
 
