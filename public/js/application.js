@@ -2,22 +2,12 @@ var guitarApp = angular.module('guitarApp', []);
 
 guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function($scope, ChordLibrary, $filter){
 
-  var findTab = function(input){
+  var findTab = function(input, type){
     for(var i=0;i<ChordLibrary.tabs.length; i++){
       if(input === ChordLibrary.tabs[i].name){
-        return ChordLibrary.tabs[i].tab;
+        return ChordLibrary.tabs[i][type];
       }
     }
-  }
-
-  $scope.pressEnter = function(e) {
-    if(e.which==13){ $scope.addTab('chord') };
-  }
-
-  var spacer = "-"
-  $scope.spacing = function(amount){
-    if(!amount){var amount = 4;}
-    return new Array(amount + 1).join(spacer);
   }
 
   $scope.chordLib = ChordLibrary;
@@ -25,25 +15,41 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
   $scope.stringInput = {}
   $scope.chord = '';
 
+  $scope.pressEnter = function(e) {
+    if(e.which==13){ $scope.addTab('chord') };
+    if(e.which==77){ $scope.addTab('measure') };
+  }
+
+  var spacer = "-"
+  $scope.spacing = function(){
+    if(!$scope.spaces) $scope.spaces = 4;
+    return new Array($scope.spaces + 1).join(spacer);
+  }
+
+  $scope.spacerCt = function(){
+    $scope.tabs.push({
+      eH: $scope.spacing(),
+      b:  $scope.spacing(),
+      g:  $scope.spacing(),
+      d:  $scope.spacing(),
+      a:  $scope.spacing(),
+      eL: $scope.spacing()})
+  }
+
+  var spaceListen = $scope.$watch('breakCt', function() {
+    $scope.spaces = parseInt($scope.breakCt)
+    $scope.spacing();
+  });
+
   $scope.$watch('chord', function() {
     $scope.stringInput = {};
-    $scope.nameTab = findTab($scope.chord);
+    $scope.nameTab = findTab($scope.chord, 'tab');
+    $scope.chordName = findTab($scope.chord, 'name');
   });
 
   $scope.$watchCollection('[string_eH,string_b,string_g,string_d,string_a,string_eL]', function() {
     $scope.chord = '';
   }, true);
-
-  $scope.spacerCt = function(amount){
-    var amount = parseInt(amount);
-    $scope.tabs.push({
-      eH: $scope.spacing(amount),
-      b:  $scope.spacing(amount),
-      g:  $scope.spacing(amount),
-      d:  $scope.spacing(amount),
-      a:  $scope.spacing(amount),
-      eL: $scope.spacing(amount)})
-  }
 
   $scope.note = function(chord, string, name){
     if(chord){
@@ -65,10 +71,30 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
     }
   }
 
+  $scope.addTab = function(item){
+    if(item === 'measure'){
+      $scope.tabs.push({eH: '|',b: '|',g: '|',d: '|',a: '|',eL:'|'})
+    }else if(item === 'chord' && $scope.stringInput !== {}){
+      $scope.tabs.push({
+        name: $scope.chordName,
+        eH:   $scope.stringInput['eH'],
+        b:    $scope.stringInput['b'],
+        g:    $scope.stringInput['g'],
+        d:    $scope.stringInput['d'],
+        a:    $scope.stringInput['a'],
+        eL:   $scope.stringInput['eL']
+      });
+    }
+    $scope.spacerCt($scope.break_ct)
+    $scope.resetStrings();
+    return;
+  }
+
   $scope.resetStrings = function(){
     $('#add-tab').attr('disabled', true)
     $scope.stringInput = {};
-    $scope.chord = '';
+    $scope.chord       = '';
+    $scope.chordName   = '';
     $scope.string_eH   = '';
     $scope.string_b    = '';
     $scope.string_g    = '';
@@ -82,22 +108,4 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
     $scope.tabs = [];
   }
 
-  $scope.addTab = function(item, break_ct){
-    if(!$scope.break_ct) $scope.break_ct = break_ct
-    if(item === 'measure'){
-      $scope.tabs.push({eH: '|',b: '|',g: '|',d: '|',a: '|',eL:'|'})
-    }else if(item === 'chord' && $scope.stringInput !== {}){
-      $scope.tabs.push({
-        eH: $scope.stringInput['eH'],
-        b:  $scope.stringInput['b'],
-        g:  $scope.stringInput['g'],
-        d:  $scope.stringInput['d'],
-        a:  $scope.stringInput['a'],
-        eL: $scope.stringInput['eL']
-      });
-      $scope.spacerCt($scope.break_ct)
-    }
-    $scope.resetStrings();
-    return;
-  }
 }])

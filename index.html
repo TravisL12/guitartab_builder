@@ -71,11 +71,16 @@
               <li>E|--<span class="prev-note">{{note(nameTab[0], string_eL, 'eL')}}</span>--</li>
             </ul>
             <fieldset id="buttons" class="col-md-7">
-              <button id="add-tab"  ng-click="addTab('chord', breakCt)">Add Tab!</button>
+
+              <button id="add-tab"  ng-click="addTab('chord')">Add Tab!</button>
               <label>(Enter)</label>
+
               <button id="add-break" ng-click="spacerCt(breakCt)">Add Break!</button>
-              <input class="break-ct" type="text" value="2" ng-model="breakCt" maxlength="2"><label>Count</label>
+              <input class="break-ct" type="number" value="2" ng-model="breakCt" maxlength="2">
+              <label>Count</label>
+
               <button id="add-meas" ng-click="addTab('measure')">Add Measure!</button>
+              <label>(Shift-M)</label>
               <li><button id="reset" ng-click="resetAll()">Reset!</button></li>
             </fieldset>
           </div>
@@ -84,15 +89,16 @@
 
         <div class="tab-body">
           <ul id='base-notes'>
-            <li>e|{{spacing()}}</li>
-            <li>B|{{spacing()}}</li>
-            <li>G|{{spacing()}}</li>
-            <li>D|{{spacing()}}</li>
-            <li>A|{{spacing()}}</li>
-            <li>E|{{spacing()}}</li>
+            <li>e|----</li>
+            <li>B|----</li>
+            <li>G|----</li>
+            <li>D|----</li>
+            <li>A|----</li>
+            <li>E|----</li>
           </ul>
 
           <ul class="user-tab" ng-repeat='tab in tabs'>
+            <li>{{tab.name}}</li>
             <li>{{tab.eH}}</li>
             <li>{{tab.b}}</li>
             <li>{{tab.g}}</li>
