@@ -45,6 +45,7 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
 
   $scope.$watch('chord', function() {
     $scope.stringInput = {};
+    if($scope.chord) $scope.chord = $scope.chord[0].toUpperCase() + $scope.chord.slice(1);
     $scope.nameTab = findTab($scope.chord, 'tab');
     $scope.chordName = findTab($scope.chord, 'name');
   });
