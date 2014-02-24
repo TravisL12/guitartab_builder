@@ -16,7 +16,7 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
   $scope.chord = '';
 
   $scope.pressEnter = function(e) {
-    if($scope.chordName || e.which == 77){
+    if($scope.note || e.which == 77){
       if(e.which==13){ $scope.addTab('chord') };
       if(e.which==77){ $scope.addTab('measure') };
     }
