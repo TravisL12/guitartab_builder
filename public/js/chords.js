@@ -4,6 +4,7 @@
     var ChordLibrary = {};
 
     ChordLibrary.tabs = [
+    {name: '|',      tab: '||||||'},
     {name: 'A',      tab: 'X02220'},
     {name: 'A6',     tab: '002222'},
     {name: 'A7',     tab: 'X02020'},
@@ -135,5 +136,5 @@
     ];
 
     return ChordLibrary;
-  })
+})
 })(angular.module('guitarApp'));
