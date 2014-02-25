@@ -91,15 +91,20 @@
           </ul>
 
           <ul class="user-tab" ng-class="{editing: edit}" ng-repeat='tab in tabs'>
-            <li class="tab-note" ng-click="noteEdit()">{{tab.name}}</li>
-            <li class="tab-note" ng-click="noteEdit()">{{tab.eH}}</li>
-            <li class="tab-note" ng-click="noteEdit()">{{tab.b}}</li>
-            <li class="tab-note" ng-click="noteEdit()">{{tab.g}}</li>
-            <li class="tab-note" ng-click="noteEdit()">{{tab.d}}</li>
-            <li class="tab-note" ng-click="noteEdit()">{{tab.a}}</li>
-            <li class="tab-note" ng-click="noteEdit()">{{tab.eL}}</li>
-            <li class='note-delete' ng-click='deleteTab();' title="Delete Chord"></li>
-            <li class='note-insert' ng-click='insertTab();' title="Insert Chord"></li>
+            <li class="tab-note">{{tab.name}}</li>
+            <li class="tab-note">{{tab.eH}}</li>
+            <li class="tab-note">{{tab.b}}</li>
+            <li class="tab-note">{{tab.g}}</li>
+            <li class="tab-note">{{tab.d}}</li>
+            <li class="tab-note">{{tab.a}}</li>
+            <li class="tab-note">{{tab.eL}}</li>
+            <li>
+              <ul class='edit-icons'>
+                <li class='note-insert' ng-click='insertTab();' title="Insert Chord"></li>
+                <li class='note-edit'   ng-click='noteEdit()' title="Edit Chord"></li>
+                <li class='note-delete' ng-click='deleteTab();' title="Delete Chord"></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>

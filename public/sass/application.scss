@@ -60,6 +60,12 @@
         list-style: none;
       }
       .editing{ border: 1px solid #f00; }
+      .edit-icons{
+        position: absolute;
+        text-align: center;
+        list-style: none;
+        padding: 0;
+      }
       .user-tab{
         @extend #base-notes;
         padding: 0;
@@ -67,34 +73,42 @@
         &:hover{
           position: relative;
           border: 1px solid #0f0;
-          .note-delete{
+          .edit-icons{
             position: absolute;
-            top: 135px;
-            left: 10px;
             font-family: 'FontAwesome';
-            color: #f00;
-            font-size: 25px;
-            &:hover{ color: #ba0000; }
-            &:active{ color: #000; }
-            &:before{
-              content: '\f057';
+            background: #fff;
+            padding: 3px 0 0 5px;
+            bottom: 0;
+            right: 0;
+            font-size: 20px;
+            list-style: none;
+            .note-edit{
+              color: #177bff;
+              &:hover{ color: #2831ff; }
+              &:before{
+                content: '\f040';
+              }
+            }
+            .note-delete{
+              color: #f00;
+              &:hover{ color: #ba0000; }
+              &:active{ color: #000; }
+              &:before{
+              content: '\f00d'; //x-mark
+              //content: '\f014'; //trash-can
             }
           }
           .note-insert{
-            position: absolute;
-            top: 0;
-            right: 3px;
-            font-family: 'FontAwesome';
-            color: #00f;
-            font-size: 22px;
-            &:hover{ color: #25ed1e; }
+            color: #25ed1e;
+            &:hover{ color: #00c605; }
             &:active{ color: #0f0; }
             &:before{
-              content: '\f129';
+              content: '\f067';
             }
           }
         }
       }
     }
   }
+}
 }

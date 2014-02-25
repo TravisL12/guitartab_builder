@@ -52,35 +52,45 @@
       list-style: none; }
     .container .tab-build .tab-body .editing {
       border: 1px solid #f00; }
+    .container .tab-build .tab-body .edit-icons {
+      position: absolute;
+      text-align: center;
+      list-style: none;
+      padding: 0; }
     .container .tab-build .tab-body .user-tab {
       padding: 0;
       border: 1px solid transparent; }
       .container .tab-build .tab-body .user-tab:hover {
         position: relative;
         border: 1px solid #0f0; }
-        .container .tab-build .tab-body .user-tab:hover .note-delete {
+        .container .tab-build .tab-body .user-tab:hover .edit-icons {
           position: absolute;
-          top: 135px;
-          left: 10px;
           font-family: 'FontAwesome';
-          color: #f00;
-          font-size: 25px; }
-          .container .tab-build .tab-body .user-tab:hover .note-delete:hover {
-            color: #ba0000; }
-          .container .tab-build .tab-body .user-tab:hover .note-delete:active {
-            color: #000; }
-          .container .tab-build .tab-body .user-tab:hover .note-delete:before {
-            content: '\f057'; }
-        .container .tab-build .tab-body .user-tab:hover .note-insert {
-          position: absolute;
-          top: 0;
-          right: 3px;
-          font-family: 'FontAwesome';
-          color: #00f;
-          font-size: 22px; }
-          .container .tab-build .tab-body .user-tab:hover .note-insert:hover {
+          background: #fff;
+          padding: 3px 0 0 5px;
+          bottom: 0;
+          right: 0;
+          font-size: 20px;
+          list-style: none; }
+          .container .tab-build .tab-body .user-tab:hover .edit-icons .note-edit {
+            color: #177bff; }
+            .container .tab-build .tab-body .user-tab:hover .edit-icons .note-edit:hover {
+              color: #2831ff; }
+            .container .tab-build .tab-body .user-tab:hover .edit-icons .note-edit:before {
+              content: '\f040'; }
+          .container .tab-build .tab-body .user-tab:hover .edit-icons .note-delete {
+            color: #f00; }
+            .container .tab-build .tab-body .user-tab:hover .edit-icons .note-delete:hover {
+              color: #ba0000; }
+            .container .tab-build .tab-body .user-tab:hover .edit-icons .note-delete:active {
+              color: #000; }
+            .container .tab-build .tab-body .user-tab:hover .edit-icons .note-delete:before {
+              content: '\f00d'; }
+          .container .tab-build .tab-body .user-tab:hover .edit-icons .note-insert {
             color: #25ed1e; }
-          .container .tab-build .tab-body .user-tab:hover .note-insert:active {
-            color: #0f0; }
-          .container .tab-build .tab-body .user-tab:hover .note-insert:before {
-            content: '\f129'; }
+            .container .tab-build .tab-body .user-tab:hover .edit-icons .note-insert:hover {
+              color: #00c605; }
+            .container .tab-build .tab-body .user-tab:hover .edit-icons .note-insert:active {
+              color: #0f0; }
+            .container .tab-build .tab-body .user-tab:hover .edit-icons .note-insert:before {
+              content: '\f067'; }
