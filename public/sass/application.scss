@@ -8,6 +8,10 @@
   .tab-build{
     border-left: 1px solid #000;
     .tab-input{
+      .edit-input{
+        color: #f00;
+        font-weight: bold;
+      }
       margin: 20px 0;
       .chord-input{ width: 60px; }
       fieldset{
@@ -55,12 +59,40 @@
         padding: 0;
         list-style: none;
       }
+      .editing{ border: 1px solid #f00; }
       .user-tab{
         @extend #base-notes;
         padding: 0;
         border: 1px solid transparent;
         &:hover{
+          position: relative;
           border: 1px solid #0f0;
+          .note-delete{
+            position: absolute;
+            top: 135px;
+            left: 10px;
+            font-family: 'FontAwesome';
+            color: #f00;
+            font-size: 25px;
+            &:hover{ color: #ba0000; }
+            &:active{ color: #000; }
+            &:before{
+              content: '\f057';
+            }
+          }
+          .note-insert{
+            position: absolute;
+            top: 0;
+            right: 3px;
+            font-family: 'FontAwesome';
+            color: #00f;
+            font-size: 22px;
+            &:hover{ color: #25ed1e; }
+            &:active{ color: #0f0; }
+            &:before{
+              content: '\f129';
+            }
+          }
         }
       }
     }

@@ -7,6 +7,7 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
   $scope.tabs = [];
   $scope.stringInput = {}
   $scope.chord = '';
+  $scope.edit = false;
 
   var findTab = function(input, type){
     for(var i=0;i<ChordLibrary.tabs.length; i++){
@@ -22,14 +23,14 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
       if(!$scope.stringInput[keys[i]]){
         $scope.stringInput[keys[i]] = spacer;
       }
-      if($scope.stringInput[keys[i]][0] === '0' && $scope.stringInput[keys[i]].length === 2){
+      if($('#add-tab').attr('disabled','false') && $scope.stringInput[keys[i]].length === 2){
         $scope.stringInput[keys[i]] = $scope.stringInput[keys[i]].replace(/^0/g,'');
       }
     }
   }
 
   $scope.pressEnter = function(e) {
-    if($scope.note || e.which == 77){
+    if($scope.stringInput || e.which == 77){
       if(e.which==13){ $scope.addTab('chord') };
       if(e.which==77){ $scope.addTab('measure') };
     }
@@ -44,7 +45,7 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
     if(item !== 'chord'){
       var space = item == 'break' ? '' : '|';
       $scope.tabs.push({
-        name: space,
+        name: $scope.chordName || "\u00A0",
         eH:   space + $scope.spacing(),
         b:    space + $scope.spacing(),
         g:    space + $scope.spacing(),
@@ -54,15 +55,28 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
       })
     }else if(item === 'chord' && $scope.stringInput !== {}){
       checkNotes();
-      $scope.tabs.push({
-        name: $scope.chordName,
-        eH:   $scope.stringInput['eH'] + $scope.spacing(),
-        b:    $scope.stringInput['b']  + $scope.spacing(),
-        g:    $scope.stringInput['g']  + $scope.spacing(),
-        d:    $scope.stringInput['d']  + $scope.spacing(),
-        a:    $scope.stringInput['a']  + $scope.spacing(),
-        eL:   $scope.stringInput['eL'] + $scope.spacing()
-      });
+      if($scope.edit){
+        $scope.tabs[$scope.editItem] = {
+          name: $scope.chordName || "\u00A0",
+          eH:   $scope.stringInput['eH'] + $scope.spacing(),
+          b:    $scope.stringInput['b']  + $scope.spacing(),
+          g:    $scope.stringInput['g']  + $scope.spacing(),
+          d:    $scope.stringInput['d']  + $scope.spacing(),
+          a:    $scope.stringInput['a']  + $scope.spacing(),
+          eL:   $scope.stringInput['eL'] + $scope.spacing()
+        };
+        $scope.edit = false;
+      }else{
+        $scope.tabs.push({
+          name: $scope.chordName || "\u00A0",
+          eH:   $scope.stringInput['eH'] + $scope.spacing(),
+          b:    $scope.stringInput['b']  + $scope.spacing(),
+          g:    $scope.stringInput['g']  + $scope.spacing(),
+          d:    $scope.stringInput['d']  + $scope.spacing(),
+          a:    $scope.stringInput['a']  + $scope.spacing(),
+          eL:   $scope.stringInput['eL'] + $scope.spacing()
+        });
+      }
     }
     $scope.resetStrings();
     return;
@@ -74,30 +88,65 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
   });
 
   $scope.$watch('chord', function() {
-    $scope.stringInput = {};
     $('#add-tab').attr('disabled', false)
     if($scope.chord) $scope.chord = $scope.chord[0].toUpperCase() + $scope.chord.slice(1);
     $scope.nameTab = findTab($scope.chord, 'tab');
     $scope.chordName = findTab($scope.chord, 'name');
     if($scope.nameTab){
-      $scope.stringInput['eH'] = $scope.nameTab[5];
-      $scope.stringInput['b']  = $scope.nameTab[4];
-      $scope.stringInput['g']  = $scope.nameTab[3];
-      $scope.stringInput['d']  = $scope.nameTab[2];
-      $scope.stringInput['a']  = $scope.nameTab[1];
-      $scope.stringInput['eL'] = $scope.nameTab[0];
+      $scope.stringInput = {
+        eH: $scope.nameTab[5],
+        b:  $scope.nameTab[4],
+        g:  $scope.nameTab[3],
+        d:  $scope.nameTab[2],
+        a:  $scope.nameTab[1],
+        eL: $scope.nameTab[0]
+      }
     }
   });
 
   $scope.$watchCollection('[string_eH,string_b,string_g,string_d,string_a,string_eL]', function() {
     $('#add-tab').attr('disabled', false)
-    $scope.stringInput['eH']   = $scope.string_eH;
-    $scope.stringInput['b']    = $scope.string_b;
-    $scope.stringInput['g']    = $scope.string_g;
-    $scope.stringInput['d']    = $scope.string_d;
-    $scope.stringInput['a']    = $scope.string_a;
-    $scope.stringInput['eL']   = $scope.string_eL;
+    $scope.stringInput = {
+      eH: $scope.string_eH,
+      b:  $scope.string_b,
+      g:  $scope.string_g,
+      d:  $scope.string_d,
+      a:  $scope.string_a,
+      eL: $scope.string_eL
+    }
   }, true);
+
+  $scope.noteEdit = function(){
+    $scope.editItem = this.$index;
+    $scope.edit = true;
+    $scope.stringInput = {
+      name: $scope.tabs.slice($scope.editItem)[0]['name'][0],
+      eH: $scope.tabs.slice($scope.editItem)[0]['eH'][0],
+      b:  $scope.tabs.slice($scope.editItem)[0]['b'][0],
+      g:  $scope.tabs.slice($scope.editItem)[0]['g'][0],
+      d:  $scope.tabs.slice($scope.editItem)[0]['d'][0],
+      a:  $scope.tabs.slice($scope.editItem)[0]['a'][0],
+      eL: $scope.tabs.slice($scope.editItem)[0]['eL'][0]
+    }
+  }
+
+  $scope.deleteTab = function(){
+    var remove = this.$index;
+    $scope.tabs.splice(remove, 1);
+  }
+
+  $scope.insertTab = function(){
+    var insert = this.$index;
+    $scope.tabs.splice(insert+1, 0, {
+      name: "\u00A0",
+      eH:   spacer + $scope.spacing(),
+      b:    spacer + $scope.spacing(),
+      g:    spacer + $scope.spacing(),
+      d:    spacer + $scope.spacing(),
+      a:    spacer + $scope.spacing(),
+      eL:   spacer + $scope.spacing()
+    } );
+  }
 
   $scope.resetStrings = function(){
     $('#add-tab').attr('disabled', true)

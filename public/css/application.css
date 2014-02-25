@@ -8,6 +8,9 @@
   border-left: 1px solid #000; }
   .container .tab-build .tab-input {
     margin: 20px 0; }
+    .container .tab-build .tab-input .edit-input {
+      color: #f00;
+      font-weight: bold; }
     .container .tab-build .tab-input .chord-input {
       width: 60px; }
     .container .tab-build .tab-input fieldset label.str-name {
@@ -47,8 +50,37 @@
       margin: 0;
       padding: 0;
       list-style: none; }
+    .container .tab-build .tab-body .editing {
+      border: 1px solid #f00; }
     .container .tab-build .tab-body .user-tab {
       padding: 0;
       border: 1px solid transparent; }
       .container .tab-build .tab-body .user-tab:hover {
+        position: relative;
         border: 1px solid #0f0; }
+        .container .tab-build .tab-body .user-tab:hover .note-delete {
+          position: absolute;
+          top: 135px;
+          left: 10px;
+          font-family: 'FontAwesome';
+          color: #f00;
+          font-size: 25px; }
+          .container .tab-build .tab-body .user-tab:hover .note-delete:hover {
+            color: #ba0000; }
+          .container .tab-build .tab-body .user-tab:hover .note-delete:active {
+            color: #000; }
+          .container .tab-build .tab-body .user-tab:hover .note-delete:before {
+            content: '\f057'; }
+        .container .tab-build .tab-body .user-tab:hover .note-insert {
+          position: absolute;
+          top: 0;
+          right: 3px;
+          font-family: 'FontAwesome';
+          color: #00f;
+          font-size: 22px; }
+          .container .tab-build .tab-body .user-tab:hover .note-insert:hover {
+            color: #25ed1e; }
+          .container .tab-build .tab-body .user-tab:hover .note-insert:active {
+            color: #0f0; }
+          .container .tab-build .tab-body .user-tab:hover .note-insert:before {
+            content: '\f129'; }

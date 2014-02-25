@@ -4,6 +4,7 @@
   <title>Guitar Demo</title>
   <link rel="stylesheet" type="text/css" href="public/css/application.css">
   <link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="public/css/font-awesome.min.css">
 
   <script src="public/js/angular.min.js"></script>
   <script src="public/js/jquery-2.0.3.min.js"></script>
@@ -40,7 +41,10 @@
           </div>
 
           <fieldset class="col-md-2">
-            <label class="str-name">Strings:</label><br>
+            <label class="str-name">
+              <span ng-hide="edit">Strings:</span>
+              <span class="edit-input" ng-show="edit">EDIT!!!</span>
+            </label><br>
             <label class="str-name">e: </label>
             <input type="text" ng-keypress='pressEnter($event)' class="string-input" ng-model="stringInput['eH']" maxlength="2"></input>
             <br>
@@ -74,27 +78,28 @@
               <li><button id="reset" ng-click="resetAll()">Reset!</button></li>
             </fieldset>
           </div>
-
         </div>
 
         <div class="tab-body">
           <ul id='base-notes'>
-            <li>e|----</li>
-            <li>B|----</li>
-            <li>G|----</li>
-            <li>D|----</li>
-            <li>A|----</li>
-            <li>E|----</li>
+            <li class="note-stem">e|--</li>
+            <li class="note-stem">B|--</li>
+            <li class="note-stem">G|--</li>
+            <li class="note-stem">D|--</li>
+            <li class="note-stem">A|--</li>
+            <li class="note-stem">E|--</li>
           </ul>
 
-          <ul class="user-tab" ng-repeat='tab in tabs'>
-            <li>{{tab.name}}</li>
-            <li>{{tab.eH}}</li>
-            <li>{{tab.b}}</li>
-            <li>{{tab.g}}</li>
-            <li>{{tab.d}}</li>
-            <li>{{tab.a}}</li>
-            <li>{{tab.eL}}</li>
+          <ul class="user-tab" ng-class="{editing: edit}" ng-repeat='tab in tabs'>
+            <li class="tab-note" ng-click="noteEdit()">{{tab.name}}</li>
+            <li class="tab-note" ng-click="noteEdit()">{{tab.eH}}</li>
+            <li class="tab-note" ng-click="noteEdit()">{{tab.b}}</li>
+            <li class="tab-note" ng-click="noteEdit()">{{tab.g}}</li>
+            <li class="tab-note" ng-click="noteEdit()">{{tab.d}}</li>
+            <li class="tab-note" ng-click="noteEdit()">{{tab.a}}</li>
+            <li class="tab-note" ng-click="noteEdit()">{{tab.eL}}</li>
+            <li class='note-delete' ng-click='deleteTab();' title="Delete Chord"></li>
+            <li class='note-insert' ng-click='insertTab();' title="Insert Chord"></li>
           </ul>
         </div>
       </div>
