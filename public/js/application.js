@@ -22,6 +22,9 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
       if(!$scope.stringInput[keys[i]]){
         $scope.stringInput[keys[i]] = spacer;
       }
+      if($scope.stringInput[keys[i]][0] === '0' && $scope.stringInput[keys[i]].length === 2){
+        $scope.stringInput[keys[i]] = $scope.stringInput[keys[i]].replace(/^0/g,'');
+      }
     }
   }
 
@@ -95,25 +98,6 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
     $scope.stringInput['a']    = $scope.string_a;
     $scope.stringInput['eL']   = $scope.string_eL;
   }, true);
-
-  $scope.note = function(chord, string, name){
-    if(chord){
-      $scope.stringInput[name] = chord;
-      return chord;
-    }else if(string){
-      $('#add-tab').attr('disabled', false)
-      if(string === '0'){
-        $scope.stringInput[name] = string;
-        return string;
-      }
-      string = string.replace(/^0/g,'');
-      $scope.stringInput[name] = string;
-      return string;
-    }else{
-      $scope.stringInput[name] = spacer;
-      return spacer;
-    }
-  }
 
   $scope.resetStrings = function(){
     $('#add-tab').attr('disabled', true)
