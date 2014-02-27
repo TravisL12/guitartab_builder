@@ -44,12 +44,18 @@
     min-height: 800px;
     border: 1px solid #000;
     padding: 20px; }
-    .container .tab-build .tab-body #base-notes, .container .tab-build .tab-body .user-tab {
-      display: inline-block;
-      font-family: 'courier';
-      margin: 0;
-      padding: 0;
-      list-style: none; }
+    .container .tab-build .tab-body .note-stem {
+      width: 32px;
+      float: left; }
+      .container .tab-build .tab-body .note-stem #base-notes + #base-notes {
+        margin-top: 2px; }
+      .container .tab-build .tab-body .note-stem #base-notes {
+        margin-top: 1px;
+        display: inline-block;
+        font-family: 'courier';
+        margin: 0;
+        padding: 0;
+        list-style: none; }
     .container .tab-build .tab-body .editing {
       border: 1px solid #f00; }
     .container .tab-build .tab-body .edit-icons {
@@ -57,13 +63,17 @@
       text-align: center;
       list-style: none;
       padding: 0; }
-    .container .tab-build .tab-body .user-tab {
+    .container .tab-build .tab-body .tab-notes .user-tab {
+      display: inline-block;
+      font-family: 'courier';
+      margin: 0;
       padding: 0;
+      list-style: none;
       border: 1px solid transparent; }
-      .container .tab-build .tab-body .user-tab:hover {
+      .container .tab-build .tab-body .tab-notes .user-tab:hover {
         position: relative;
         border: 1px solid #0f0; }
-        .container .tab-build .tab-body .user-tab:hover .edit-icons {
+        .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons {
           position: absolute;
           font-family: 'FontAwesome';
           background: #fff;
@@ -72,25 +82,25 @@
           right: 0;
           font-size: 20px;
           list-style: none; }
-          .container .tab-build .tab-body .user-tab:hover .edit-icons .note-edit {
+          .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-edit {
             color: #177bff; }
-            .container .tab-build .tab-body .user-tab:hover .edit-icons .note-edit:hover {
+            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-edit:hover {
               color: #2831ff; }
-            .container .tab-build .tab-body .user-tab:hover .edit-icons .note-edit:before {
+            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-edit:before {
               content: '\f040'; }
-          .container .tab-build .tab-body .user-tab:hover .edit-icons .note-delete {
+          .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-delete {
             color: #f00; }
-            .container .tab-build .tab-body .user-tab:hover .edit-icons .note-delete:hover {
+            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-delete:hover {
               color: #ba0000; }
-            .container .tab-build .tab-body .user-tab:hover .edit-icons .note-delete:active {
+            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-delete:active {
               color: #000; }
-            .container .tab-build .tab-body .user-tab:hover .edit-icons .note-delete:before {
+            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-delete:before {
               content: '\f00d'; }
-          .container .tab-build .tab-body .user-tab:hover .edit-icons .note-insert {
+          .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert {
             color: #25ed1e; }
-            .container .tab-build .tab-body .user-tab:hover .edit-icons .note-insert:hover {
+            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert:hover {
               color: #00c605; }
-            .container .tab-build .tab-body .user-tab:hover .edit-icons .note-insert:active {
+            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert:active {
               color: #0f0; }
-            .container .tab-build .tab-body .user-tab:hover .edit-icons .note-insert:before {
+            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert:before {
               content: '\f067'; }

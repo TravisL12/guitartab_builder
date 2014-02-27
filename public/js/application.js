@@ -17,6 +17,16 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
     }
   }
 
+  var checkLength = function(){
+    var count = 0;
+    for(var i = 0; i < $scope.tabs.length; i++){
+      count += $scope.tabs[i]['eH'].length;
+    }
+    console.log(count)
+    if(count >= (parseInt(count/80)+80*parseInt(count%80)) ){
+      $('.note-stem').append("<ul id='base-notes'><li>&nbsp;</li><li>e|--</li><li>B|--</li><li>G|--</li><li>D|--</li><li>A|--</li><li>E|--</li></ul>")
+    }
+  }
   var checkNotes = function(){
     keys = ['eH','b','g','d','a','eL'];
     for(var i = 0; i < keys.length; i++){
@@ -42,6 +52,7 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
   }
 
   $scope.addTab = function(item){
+
     if(item !== 'chord'){
       var space = item == 'break' ? '' : '|';
       $scope.tabs.push({
@@ -78,6 +89,7 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
         });
       }
     }
+    checkLength();
     $scope.resetStrings();
     return;
   }
