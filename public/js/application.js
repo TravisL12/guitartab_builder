@@ -56,37 +56,46 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
       var space = item == 'break' ? '' : '|';
       $scope.tabs.push({
         name: $scope.chordName || "\u00A0",
-        eH:   space + $scope.spacing(),
-        b:    space + $scope.spacing(),
-        g:    space + $scope.spacing(),
-        d:    space + $scope.spacing(),
-        a:    space + $scope.spacing(),
-        eL:   space + $scope.spacing()
+        eH:   space,
+        b:    space,
+        g:    space,
+        d:    space,
+        a:    space,
+        eL:   space
       })
     }else if(item === 'chord' && $scope.stringInput !== {}){
       checkNotes();
       if($scope.edit){
         $scope.tabs[$scope.editItem] = {
           name: $scope.chordName || "\u00A0",
-          eH:   $scope.stringInput['eH'] + $scope.spacing(),
-          b:    $scope.stringInput['b']  + $scope.spacing(),
-          g:    $scope.stringInput['g']  + $scope.spacing(),
-          d:    $scope.stringInput['d']  + $scope.spacing(),
-          a:    $scope.stringInput['a']  + $scope.spacing(),
-          eL:   $scope.stringInput['eL'] + $scope.spacing()
+          eH:   $scope.stringInput['eH'],
+          b:    $scope.stringInput['b'] ,
+          g:    $scope.stringInput['g'] ,
+          d:    $scope.stringInput['d'] ,
+          a:    $scope.stringInput['a'] ,
+          eL:   $scope.stringInput['eL']
         };
         $scope.edit = false;
       }else{
         $scope.tabs.push({
           name: $scope.chordName || "\u00A0",
-          eH:   $scope.stringInput['eH'] + $scope.spacing(),
-          b:    $scope.stringInput['b']  + $scope.spacing(),
-          g:    $scope.stringInput['g']  + $scope.spacing(),
-          d:    $scope.stringInput['d']  + $scope.spacing(),
-          a:    $scope.stringInput['a']  + $scope.spacing(),
-          eL:   $scope.stringInput['eL'] + $scope.spacing()
+          eH:   $scope.stringInput['eH'],
+          b:    $scope.stringInput['b'] ,
+          g:    $scope.stringInput['g'] ,
+          d:    $scope.stringInput['d'] ,
+          a:    $scope.stringInput['a'] ,
+          eL:   $scope.stringInput['eL']
         });
       }
+      $scope.tabs.push({
+        name: "\u00A0",
+        eH: $scope.spacing(),
+        b:  $scope.spacing(),
+        g:  $scope.spacing(),
+        d:  $scope.spacing(),
+        a:  $scope.spacing(),
+        eL: $scope.spacing()
+      })
     }
     checkLength();
     $scope.resetStrings();

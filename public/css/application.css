@@ -58,11 +58,14 @@
         list-style: none; }
     .container .tab-build .tab-body .edit-icons {
       position: absolute;
+      top: 150px;
+      left: -6px;
       text-align: center;
       list-style: none;
       padding: 0; }
     .container .tab-build .tab-body .tab-notes .user-tab {
       display: inline-block;
+      text-align: center;
       position: relative;
       font-family: 'courier';
       margin: 0;
@@ -84,15 +87,36 @@
         border: 1px solid #0f0; }
         .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons {
           position: absolute;
+          display: inline-table;
           font-family: 'FontAwesome';
           background: #fff;
-          padding: 3px 0 0 5px;
-          bottom: 0;
-          right: 0;
+          border: 1px solid black;
+          border-radius: 3px;
+          padding: 3px 10px;
           font-size: 20px;
           list-style: none; }
+          .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons li {
+            display: inline; }
+          .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons:after {
+            content: " ";
+            position: absolute;
+            top: -17px;
+            left: 1px;
+            width: 0;
+            height: 0;
+            border: 8px solid transparent;
+            border-bottom-color: #000; }
+          .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert {
+            color: #25ed1e; }
+            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert:hover {
+              color: #00c605; }
+            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert:active {
+              color: #0f0; }
+            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert:before {
+              content: '\f067'; }
           .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-edit {
-            color: #177bff; }
+            color: #177bff;
+            padding: 0 10px; }
             .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-edit:hover {
               color: #2831ff; }
             .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-edit:before {
@@ -105,11 +129,3 @@
               color: #000; }
             .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-delete:before {
               content: '\f00d'; }
-          .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert {
-            color: #25ed1e; }
-            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert:hover {
-              color: #00c605; }
-            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert:active {
-              color: #0f0; }
-            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert:before {
-              content: '\f067'; }

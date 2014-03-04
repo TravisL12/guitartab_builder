@@ -7,6 +7,7 @@
   <link rel="stylesheet" type="text/css" href="public/css/font-awesome.min.css">
 
   <script src="public/js/angular.min.js"></script>
+  <script src="public/js/bootstrap.min.js"></script>
   <script src="public/js/jquery-2.0.3.min.js"></script>
   <script src="public/js/application.js"></script>
   <script src="public/js/chords.js"></script>
@@ -94,7 +95,7 @@
           </div>
 
           <div class="tab-notes">
-            <ul class="user-tab" ng-class="{'editing': edit}" ng-repeat='tab in tabs'>
+            <ul class="user-tab" ng-repeat='tab in tabs'>
               <li>{{tab.name}}</li>
               <li>{{tab.eH}}</li>
               <li>{{tab.b}}</li>

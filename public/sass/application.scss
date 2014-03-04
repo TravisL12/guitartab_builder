@@ -67,6 +67,8 @@
       }
       .edit-icons{
         position: absolute;
+        top: 150px;
+        left: -6px;
         text-align: center;
         list-style: none;
         padding: 0;
@@ -74,6 +76,7 @@
       .tab-notes{
         .user-tab{
           display: inline-block;
+          text-align: center;
           position: relative;
           font-family: 'courier';
           margin: 0;
@@ -86,50 +89,57 @@
             position: absolute;
             color: #f00;
             &:hover{ color: #ba0000; }
-            &:before{
-              content: '\f040';
-            }
+            &:before{ content: '\f040'; }
           }
           &:hover{
             position: relative;
             border: 1px solid #0f0;
             .edit-icons{
               position: absolute;
+              display: inline-table;
               font-family: 'FontAwesome';
               background: #fff;
-              padding: 3px 0 0 5px;
-              bottom: 0;
-              right: 0;
+              border: 1px solid black;
+              border-radius: 3px;
+              padding: 3px 10px;
               font-size: 20px;
               list-style: none;
+              li{ display: inline; }
+              &:after{
+                content: " ";
+                position: absolute;
+                top: -17px;
+                left: 1px;
+                width: 0;
+                height: 0;
+                border: 8px solid transparent;
+                border-bottom-color: #000;
+              }
+
+              .note-insert{
+                color: #25ed1e;
+                &:hover{ color: #00c605; }
+                &:active{ color: #0f0; }
+                &:before{ content: '\f067'; }
+              }
+
               .note-edit{
                 color: #177bff;
+                padding: 0 10px;
                 &:hover{ color: #2831ff; }
-                &:before{
-                  content: '\f040';
-                }
+                &:before{ content: '\f040'; }
               }
+
               .note-delete{
                 color: #f00;
                 &:hover{ color: #ba0000; }
                 &:active{ color: #000; }
-                &:before{
-              content: '\f00d'; //x-mark
-              //content: '\f014'; //trash-can
-            }
-          }
-          .note-insert{
-            color: #25ed1e;
-            &:hover{ color: #00c605; }
-            &:active{ color: #0f0; }
-            &:before{
-              content: '\f067';
+                &:before{ content: '\f00d'; }
+              }
             }
           }
         }
       }
     }
   }
-}
-}
 }
