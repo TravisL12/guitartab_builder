@@ -65,7 +65,6 @@
           list-style: none;
         }
       }
-      .editing{ border: 1px solid #f00; }
       .edit-icons{
         position: absolute;
         text-align: center;
@@ -75,11 +74,22 @@
       .tab-notes{
         .user-tab{
           display: inline-block;
+          position: relative;
           font-family: 'courier';
           margin: 0;
           padding: 0;
           list-style: none;
           border: 1px solid transparent;
+          .editing{ border: 1px solid #f00; }
+          .cxl-edit{
+            font-family: 'FontAwesome';
+            position: absolute;
+            color: #f00;
+            &:hover{ color: #ba0000; }
+            &:before{
+              content: '\f040';
+            }
+          }
           &:hover{
             position: relative;
             border: 1px solid #0f0;

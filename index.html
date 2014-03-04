@@ -65,14 +65,14 @@
           </fieldset>
 
           <div class="tab-preview col-md-8">
-            <fieldset id="buttons" class="col-md-7">
+            <fieldset id="buttons">
               <button id="add-tab"  ng-click="addTab('chord')">Add Tab!</button>
               <label>(Enter)</label>
-
+              <br>
               <button id="add-break" ng-click="addTab('break')">Add Break!</button>
               <input class="break-ct" min='0' max='30' type="number" value="2" ng-model="breakCt" maxlength="2">
               <label>Count</label>
-
+              <br>
               <button id="add-meas" ng-click="addTab('measure')">Add Measure!</button>
               <label>(Shift-M)</label>
               <li><button id="reset" ng-click="resetAll()">Reset!</button></li>
@@ -94,7 +94,7 @@
           </div>
 
           <div class="tab-notes">
-            <ul class="user-tab" ng-class="{editing: edit}" ng-repeat='tab in tabs'>
+            <ul class="user-tab" ng-class="{'editing': edit}" ng-repeat='tab in tabs'>
               <li>{{tab.name}}</li>
               <li>{{tab.eH}}</li>
               <li>{{tab.b}}</li>
@@ -109,6 +109,7 @@
                   <li class='note-delete' ng-click='deleteTab();' title="Delete Chord"></li>
                 </ul>
               </li>
+              <li class='cxl-edit' ng-show="edit" ng-click='edit = false' title="Cancel Edit"></li>
             </ul>
           </div>
         </div>

@@ -56,8 +56,6 @@
         margin: 0;
         padding: 0;
         list-style: none; }
-    .container .tab-build .tab-body .editing {
-      border: 1px solid #f00; }
     .container .tab-build .tab-body .edit-icons {
       position: absolute;
       text-align: center;
@@ -65,11 +63,22 @@
       padding: 0; }
     .container .tab-build .tab-body .tab-notes .user-tab {
       display: inline-block;
+      position: relative;
       font-family: 'courier';
       margin: 0;
       padding: 0;
       list-style: none;
       border: 1px solid transparent; }
+      .container .tab-build .tab-body .tab-notes .user-tab .editing {
+        border: 1px solid #f00; }
+      .container .tab-build .tab-body .tab-notes .user-tab .cxl-edit {
+        font-family: 'FontAwesome';
+        position: absolute;
+        color: #f00; }
+        .container .tab-build .tab-body .tab-notes .user-tab .cxl-edit:hover {
+          color: #ba0000; }
+        .container .tab-build .tab-body .tab-notes .user-tab .cxl-edit:before {
+          content: '\f040'; }
       .container .tab-build .tab-body .tab-notes .user-tab:hover {
         position: relative;
         border: 1px solid #0f0; }

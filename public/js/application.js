@@ -22,7 +22,6 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
     for(var i = 0; i < $scope.tabs.length; i++){
       count += $scope.tabs[i]['eH'].length;
     }
-    console.log(count)
     if(count >= (parseInt(count/80)+80*parseInt(count%80)) ){
       $('.note-stem').append("<ul id='base-notes'><li>&nbsp;</li><li>e|--</li><li>B|--</li><li>G|--</li><li>D|--</li><li>A|--</li><li>E|--</li></ul>")
     }
@@ -131,14 +130,18 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
   $scope.noteEdit = function(){
     $scope.editItem = this.$index;
     $scope.edit = true;
-    $scope.stringInput = {
-      name: $scope.tabs.slice($scope.editItem)[0]['name'][0],
-      eH: $scope.tabs.slice($scope.editItem)[0]['eH'][0],
-      b:  $scope.tabs.slice($scope.editItem)[0]['b'][0],
-      g:  $scope.tabs.slice($scope.editItem)[0]['g'][0],
-      d:  $scope.tabs.slice($scope.editItem)[0]['d'][0],
-      a:  $scope.tabs.slice($scope.editItem)[0]['a'][0],
-      eL: $scope.tabs.slice($scope.editItem)[0]['eL'][0]
+    var editString = $scope.tabs.slice($scope.editItem)[0];
+    if(editString['name'] !== "\u00A0"){
+      $scope.chord = findTab(editString['name'], 'name');
+    }else{
+      $scope.stringInput = {
+        eH:   editString['eH'][0],
+        b:    editString['b'][0],
+        g:    editString['g'][0],
+        d:    editString['d'][0],
+        a:    editString['a'][0],
+        eL:   editString['eL'][0]
+      }
     }
   }
 
