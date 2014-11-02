@@ -1,131 +1,115 @@
-.container .search {
+.search {
   height: 100%; }
-  .container .search tr:nth-child(even) {
+  .search tr:nth-child(even) {
     background: #ddd; }
-  .container .search tr:nth-child(odd) {
+  .search tr:nth-child(odd) {
     background: #eee; }
-.container .tab-build {
-  border-left: 1px solid #000; }
-  .container .tab-build .tab-input {
-    margin: 20px 0; }
-    .container .tab-build .tab-input .edit-input {
-      color: #f00;
-      font-weight: bold; }
-    .container .tab-build .tab-input .chord-input {
-      width: 60px; }
-    .container .tab-build .tab-input fieldset label.str-name {
-      width: 20px; }
-    .container .tab-build .tab-input fieldset .string-input {
-      width: 30px; }
-    .container .tab-build .tab-input .tab-preview {
-      display: inline-block; }
-      .container .tab-build .tab-input .tab-preview #chord-prev {
-        text-align: center;
-        display: inline-block;
-        font-family: 'courier';
-        margin: 0;
-        padding: 0;
-        list-style: none; }
-        .container .tab-build .tab-input .tab-preview #chord-prev .prev-note {
-          color: #f00; }
-      .container .tab-build .tab-input .tab-preview #buttons {
-        margin: 0;
-        padding: 0;
-        list-style: none; }
-        .container .tab-build .tab-input .tab-preview #buttons label {
-          padding-left: 5px; }
-        .container .tab-build .tab-input .tab-preview #buttons button {
-          margin: 10px 0;
-          width: 120px; }
-        .container .tab-build .tab-input .tab-preview #buttons .break-ct {
-          width: 40px; }
-  .container .tab-build .tab-body {
-    min-width: 800px;
-    min-height: 800px;
-    border: 1px solid #000;
-    padding: 20px; }
-    .container .tab-build .tab-body .note-stem {
-      width: 32px;
-      float: left; }
-      .container .tab-build .tab-body .note-stem #base-notes + #base-notes {
-        margin-top: 2px; }
-      .container .tab-build .tab-body .note-stem #base-notes {
-        margin-top: 1px;
-        display: inline-block;
-        font-family: 'courier';
-        margin: 0;
-        padding: 0;
-        list-style: none; }
-    .container .tab-build .tab-body .edit-icons {
-      position: absolute;
-      top: 150px;
-      left: -6px;
-      text-align: center;
-      list-style: none;
-      padding: 0; }
-    .container .tab-build .tab-body .tab-notes .user-tab {
+
+.filtered-chords {
+  height: 320px;
+  overflow-y: scroll;
+  margin-bottom: 20px; }
+  .filtered-chords table {
+    border-bottom: 1px solid gray; }
+    .filtered-chords table td {
+      padding: 2px 8px !important; }
+  .filtered-chords .chord {
+    font-family: 'courier'; }
+
+.input-buttons button {
+  width: 115px; }
+
+.edit-input {
+  color: #f00;
+  font-weight: bold; }
+
+.tab-body {
+  min-width: 800px;
+  min-height: 800px;
+  border: 1px solid #000;
+  padding: 20px; }
+  .tab-body .note-stem {
+    width: 32px;
+    float: left; }
+    .tab-body .note-stem #base-notes + #base-notes {
+      margin-top: 2px; }
+    .tab-body .note-stem #base-notes {
+      margin-top: 1px;
       display: inline-block;
-      text-align: center;
-      position: relative;
       font-family: 'courier';
       margin: 0;
       padding: 0;
-      list-style: none;
-      border: 1px solid transparent; }
-      .container .tab-build .tab-body .tab-notes .user-tab .editing {
-        border: 1px solid #f00; }
-      .container .tab-build .tab-body .tab-notes .user-tab .cxl-edit {
-        font-family: 'FontAwesome';
+      list-style: none; }
+  .tab-body .edit-icons {
+    position: absolute;
+    top: 150px;
+    left: -6px;
+    text-align: center;
+    list-style: none;
+    padding: 0; }
+  .tab-body .tab-notes .user-tab {
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    font-family: 'courier';
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid transparent; }
+    .tab-body .tab-notes .user-tab .editing {
+      border: 1px solid #f00; }
+    .tab-body .tab-notes .user-tab .cxl-edit {
+      font-family: 'FontAwesome';
+      position: absolute;
+      color: #f00; }
+      .tab-body .tab-notes .user-tab .cxl-edit:hover {
+        color: #ba0000; }
+      .tab-body .tab-notes .user-tab .cxl-edit:before {
+        content: '\f040'; }
+    .tab-body .tab-notes .user-tab:hover {
+      position: relative;
+      border: 1px solid #0f0; }
+      .tab-body .tab-notes .user-tab:hover .edit-icons {
         position: absolute;
-        color: #f00; }
-        .container .tab-build .tab-body .tab-notes .user-tab .cxl-edit:hover {
-          color: #ba0000; }
-        .container .tab-build .tab-body .tab-notes .user-tab .cxl-edit:before {
-          content: '\f040'; }
-      .container .tab-build .tab-body .tab-notes .user-tab:hover {
-        position: relative;
-        border: 1px solid #0f0; }
-        .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons {
+        display: inline-table;
+        font-family: 'FontAwesome';
+        background: #fff;
+        border: 1px solid black;
+        border-radius: 3px;
+        padding: 3px 10px;
+        font-size: 20px;
+        list-style: none; }
+        .tab-body .tab-notes .user-tab:hover .edit-icons li {
+          display: inline; }
+        .tab-body .tab-notes .user-tab:hover .edit-icons:after {
+          content: " ";
           position: absolute;
-          display: inline-table;
-          font-family: 'FontAwesome';
-          background: #fff;
-          border: 1px solid black;
-          border-radius: 3px;
-          padding: 3px 10px;
-          font-size: 20px;
-          list-style: none; }
-          .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons li {
-            display: inline; }
-          .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons:after {
-            content: " ";
-            position: absolute;
-            top: -17px;
-            left: 1px;
-            width: 0;
-            height: 0;
-            border: 8px solid transparent;
-            border-bottom-color: #000; }
-          .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert {
-            color: #25ed1e; }
-            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert:hover {
-              color: #00c605; }
-            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert:active {
-              color: #0f0; }
-            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert:before {
-              content: '\f067'; }
-          .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-edit {
-            color: #177bff;
-            padding: 0 10px; }
-            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-edit:hover {
-              color: #2831ff; }
-            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-edit:before {
-              content: '\f040'; }
-          .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-delete {
-            color: #f00; }
-            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-delete:hover {
-              color: #ba0000; }
-            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-delete:active {
-              color: #000; }
-            .container .tab-build .tab-body .tab-notes .user-tab:hover .edit-icons .note-delete:before {
-              content: '\f00d'; }
+          top: -17px;
+          left: 1px;
+          width: 0;
+          height: 0;
+          border: 8px solid transparent;
+          border-bottom-color: #000; }
+        .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert {
+          color: #25ed1e; }
+          .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert:hover {
+            color: #00c605; }
+          .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert:active {
+            color: #0f0; }
+          .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert:before {
+            content: '\f067'; }
+        .tab-body .tab-notes .user-tab:hover .edit-icons .note-edit {
+          color: #177bff;
+          padding: 0 10px; }
+          .tab-body .tab-notes .user-tab:hover .edit-icons .note-edit:hover {
+            color: #2831ff; }
+          .tab-body .tab-notes .user-tab:hover .edit-icons .note-edit:before {
+            content: '\f040'; }
+        .tab-body .tab-notes .user-tab:hover .edit-icons .note-delete {
+          color: #f00; }
+          .tab-body .tab-notes .user-tab:hover .edit-icons .note-delete:hover {
+            color: #ba0000; }
+          .tab-body .tab-notes .user-tab:hover .edit-icons .note-delete:active {
+            color: #000; }
+          .tab-body .tab-notes .user-tab:hover .edit-icons .note-delete:before {
+            content: '\f00d'; }
