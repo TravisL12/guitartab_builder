@@ -22,10 +22,9 @@
     <div class='row'>
       <form class='chord-builder-form col-md-2' ng-model='inputForm.inputForm' ng-submit='lookupChord()'>
         <div class='form-group'>
-          <label class='control-label'>Chord:</label>
-          <input class='form-control' id='chord-input' ng-change='lookupChord()' ng-model='inputForm.chordInput' maxlength='6'></input>
+          <input class='form-control' id='chord-input' ng-change='lookupChord()' placeholder='Chord Search' ng-model='inputForm.chordInput' maxlength='6'></input>
         </div>
-
+<!--
         <div class='form-group'>
           <label class='control-label'>Strings:</label>
           <input class='form-control' id='chord-input' ng-model='inputForm.stringNumbers' maxlength='6'></input>
@@ -35,7 +34,7 @@
           <label class='control-label'>Frets:</label>
           <input class='form-control' id='chord-input' ng-model='inputForm.fretNumbers' maxlength='6'></input>
         </div>
-        <button class='btn btn-default' ng-click='buildRawTab()'>Submit</button>
+        <button class='btn btn-default' ng-click='buildRawTab()'>Submit</button> -->
       </form>
 
       <form class='individual-notes-form col-md-2 form-horizontal' ng-model='inputForm.inputForm' ng-submit='lookupChord()'>
@@ -116,36 +115,35 @@
 
     <div class="tab-body">
 
-      <div class="tab-notes">
-        <ul class="user-tab">
-          <li>&nbsp;</li>
-          <li>e|</li>
-          <li>B|</li>
-          <li>G|</li>
-          <li>D|</li>
-          <li>A|</li>
-          <li>E|</li>
-        </ul>
+      <ul class="user-tab">
+        <li>&nbsp;</li>
+        <li>e|</li>
+        <li>B|</li>
+        <li>G|</li>
+        <li>D|</li>
+        <li>A|</li>
+        <li>E|</li>
+      </ul>
 
-        <ul class="user-tab" ng-repeat='tab in tabs'>
-          <li>{{printSpacing(tab.breakCt, '&nbsp;')}}{{tab.chordInput}}</li>
-          <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[0]}}</li>
-          <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[1]}}</li>
-          <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[2]}}</li>
-          <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[3]}}</li>
-          <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[4]}}</li>
-          <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[5]}}</li>
-          <li>
-            <ul class='edit-icons'>
-              <!-- <li class='note-insert' ng-click='insertTab();' title="Insert Chord"></li> -->
-              <li class='note-edit'   ng-click='editTab()' title="Edit Chord"></li>
-              <li class='note-delete' ng-click='deleteTab();' title="Delete Chord"></li>
-              <li class='note-measure-up' ng-click='editMeasure(1);' title="Increase Measure"></li>
-              <li class='note-measure-down' ng-click='editMeasure(0);' title="Decrease Measure"></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+      <ul class="user-tab" ng-repeat='tab in tabs'>
+        <li class='tab-name'>{{tab.chordInput}}</li>
+        <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[0] || spacer }}</li>
+        <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[1] || spacer }}</li>
+        <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[2] || spacer }}</li>
+        <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[3] || spacer }}</li>
+        <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[4] || spacer }}</li>
+        <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[5] || spacer }}</li>
+        <li>
+          <ul class='edit-icons'>
+            <li class='note-insert'       ng-click='insertTab();'    title="Insert Chord"></li>
+            <li class='note-edit'         ng-click='editTab()'       title="Edit Chord"></li>
+            <li class='note-delete'       ng-click='deleteTab();'    title="Delete Chord"></li>
+            <li class='note-measure-up'   ng-click='editMeasure(1);' title="Increase Measure"></li>
+            <li class='note-measure-down' ng-click='editMeasure(0);' title="Decrease Measure"></li>
+            <li class='measure-count'>({{tab.breakCt}})</li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
 

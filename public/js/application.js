@@ -2,10 +2,19 @@ var guitarApp = angular.module('guitarApp', []);
 
 guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function($scope, ChordLibrary, $filter){
 
-  var spacer = "-"
+  $scope.spacer = "-"
   $scope.chordLib = ChordLibrary;
   $scope.tabs = [];
   $scope.edit = false;
+
+  function blankChord(breaks) {
+    var breakCt = breaks || 4;
+    return {
+      breakCt: breaks,
+      chordInput: '',
+      stringInput: Array(6)
+    }
+  };
 
   function titleCase(text) {
     if (text) {
@@ -14,11 +23,7 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
   }
 
   $scope.reset = function(breaks) {
-    $scope.inputForm = {
-      breakCt: breaks,
-      chordInput: '',
-      stringInput: ['-','-','-','-','-','-']
-    };
+    $scope.inputForm = blankChord(breaks);
   }
   $scope.reset(4);
 
@@ -38,8 +43,14 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
   }
 
   $scope.printSpacing = function(spaces, character) {
-    var joinVal = character || spacer;
+    var joinVal = character || $scope.spacer;
     return Array(spaces + 1).join(joinVal);
+  }
+
+  $scope.insertTab = function() {
+    $scope.editIdx = this.$index;
+    $scope.tabs.splice($scope.editIdx, 0, blankChord($scope.inputForm.breakCt));
+    $scope.edit = true;
   }
 
   $scope.editTab = function() {
@@ -54,6 +65,19 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
     $scope.tabs[$scope.editIdx].stringInput = $scope.inputForm.stringInput;
     $scope.reset($scope.inputForm.breakCt);
     $scope.edit = false;
+  }
+
+  $scope.deleteTab = function() {
+    var idx = this.$index;
+    $scope.tabs.splice(idx, 1);
+  }
+
+  $scope.editMeasure = function(num) {
+    if (num > 0) {
+      $scope.tabs[this.$index].breakCt += 1
+    } else if ($scope.tabs[this.$index].breakCt > 0) {
+      $scope.tabs[this.$index].breakCt -= 1;
+    }
   }
 
   $scope.lookupChord = function(){
@@ -82,28 +106,17 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
     $scope.reset($scope.inputForm.breakCt);
   }
 
-  $scope.editMeasure = function(num) {
-    if (num > 0) {
-      $scope.tabs[this.$index].breakCt += 1
-    } else if ($scope.tabs[this.$index].breakCt > 0) {
-      $scope.tabs[this.$index].breakCt -= 1;
-    }
-  }
-
-  $scope.deleteTab = function() {
-    var idx = this.$index;
-    $scope.tabs.splice(idx, 1);
-  }
-
   $scope.clickedFilteredChord = function(choice) {
     $scope.inputForm.chordInput = choice.name;
     $scope.inputForm.stringInput = choice.tab;
-    $scope.addTab();
+    $scope.edit ? $scope.saveEditTab() : $scope.addTab();
   }
 
   $scope.pressEnter = function(e) {
     if($scope.inputForm.chordInput || e.which == 77){
-      if(e.which==13){ $scope.addTab() };
+      if(e.which==13){
+        $scope.edit ? $scope.saveEditTab() : $scope.addTab();
+      };
       if(e.which==77){ $scope.addMeasure() };
     }
   }
