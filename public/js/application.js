@@ -32,6 +32,20 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
     return Array(spaces + 1).join(joinVal);
   }
 
+  $scope.editTab = function() {
+    $scope.inputForm.chordInput = $scope.tabs[this.$index].chordInput;
+    $scope.inputForm.stringInput = $scope.tabs[this.$index].stringInput;
+    $scope.editIdx = this.$index;
+    $scope.edit = true;
+  }
+
+  $scope.saveEditTab = function() {
+    $scope.tabs[$scope.editIdx].chordInput  = $scope.inputForm.chordInput;
+    $scope.tabs[$scope.editIdx].stringInput = $scope.inputForm.stringInput;
+    $scope.reset($scope.inputForm.breakCt);
+    $scope.edit = false;
+  }
+
   $scope.lookupChordTab = function(){
     $scope.inputForm.chordInput = titleCase($scope.inputForm.chordInput);
     for(var i=0;i<ChordLibrary.length; i++){
@@ -42,7 +56,7 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
   }
 
   $scope.addTab = function() {
-    if ($scope.inputForm.stringInput.length > 0) {
+    if ($scope.inputForm.stringInput.length > 0 && !$scope.edit) {
       $scope.tabs.push($scope.inputForm);
       $scope.reset($scope.inputForm.breakCt);
       document.getElementById("chord-input").focus();
@@ -71,7 +85,7 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
     $scope.tabs.splice(idx, 1);
   }
 
-  $scope.clickedChord = function(choice) {
+  $scope.clickedFilteredChord = function(choice) {
     $scope.inputForm.chordInput = choice.name;
     $scope.inputForm.stringInput = choice.tab;
     $scope.addTab();
