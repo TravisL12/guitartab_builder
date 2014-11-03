@@ -17,7 +17,7 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
     $scope.inputForm = {
       breakCt: breaks,
       chordInput: '',
-      stringInput: []
+      stringInput: ['-','-','-','-','-','-']
     };
   }
   $scope.reset(4);
@@ -25,6 +25,16 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
   $scope.resetAll = function() {
     $scope.tabs = [];
     $scope.reset(4);
+  }
+
+  $scope.buildRawTab = function() {
+    var strings = $scope.inputForm.stringNumbers.split('');
+    var frets = $scope.inputForm.fretNumbers.split('');
+
+    for(var i=0; i<strings.length; i++) {
+      $scope.inputForm.stringInput[strings[i] - 1] = frets[i];
+    }
+    $scope.addTab();
   }
 
   $scope.printSpacing = function(spaces, character) {
@@ -46,7 +56,7 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
     $scope.edit = false;
   }
 
-  $scope.lookupChordTab = function(){
+  $scope.lookupChord = function(){
     $scope.inputForm.chordInput = titleCase($scope.inputForm.chordInput);
     for(var i=0;i<ChordLibrary.length; i++){
       if($scope.inputForm.chordInput === ChordLibrary[i].name){
@@ -67,7 +77,7 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
 
   $scope.addMeasure = function() {
     $scope.inputForm.chordInput = '|';
-    $scope.lookupChordTab();
+    $scope.lookupChord();
     $scope.tabs.push($scope.inputForm);
     $scope.reset($scope.inputForm.breakCt);
   }
