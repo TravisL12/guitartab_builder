@@ -2,119 +2,148 @@
 <html>
 <head>
   <title>Guitar Demo</title>
-  <link rel="stylesheet" type="text/css" href="public/css/application.css">
-  <link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="public/css/font-awesome.min.css">
+  <link rel='stylesheet' type='text/css' href='public/css/bootstrap.min.css'>
+  <link rel='stylesheet' type='text/css' href='public/css/font-awesome.min.css'>
+  <link rel='stylesheet' type='text/css' href='public/css/application.css'>
 
-  <script src="public/js/angular.min.js"></script>
-  <script src="public/js/bootstrap.min.js"></script>
-  <script src="public/js/jquery-2.0.3.min.js"></script>
-  <script src="public/js/application.js"></script>
-  <script src="public/js/chords.js"></script>
+  <script src='public/js/angular.min.js'></script>
+  <script src='public/js/jquery-2.0.3.min.js'></script>
+  <script src='public/js/bootstrap.min.js'></script>
+  <script src='public/js/application.js'></script>
+  <script src='public/js/chords.js'></script>
 </head>
 
 <body>
 
-  <div ng-app="guitarApp">
-    <div class="container row-fluid" ng-controller="ChordCtrl">
+  <div class='container' ng-app='guitarApp' ng-controller='ChordCtrl' ng-keypress='pressEnter($event)'>
 
-      <div class="search col-md-2">
-        <label>Chord Search</label><br>
-        <table>
-          <tr>
-            <td width="60px">Name:</td>
-            <td>Chord:</td>
-          </tr>
-          <tr ng-repeat="chord in chordLib.tabs | filter:chord">
-            <td width="60px">{{chord.name}}</td>
-            <td>{{chord.tab}}</td>
-          </tr>
+    <h1>Build a Tab!</h1>
+
+    <div class='row'>
+      <form class='chord-builder-form col-md-2' ng-model='inputForm.inputForm' ng-submit='lookupChord()'>
+        <div class='form-group'>
+          <input class='form-control' id='chord-input' ng-change='lookupChord()' placeholder='Chord Search' ng-model='inputForm.chordInput' maxlength='6'></input>
+        </div>
+<!--
+        <div class='form-group'>
+          <label class='control-label'>Strings:</label>
+          <input class='form-control' id='chord-input' ng-model='inputForm.stringNumbers' maxlength='6'></input>
+        </div>
+
+        <div class='form-group'>
+          <label class='control-label'>Frets:</label>
+          <input class='form-control' id='chord-input' ng-model='inputForm.fretNumbers' maxlength='6'></input>
+        </div>
+        <button class='btn btn-default' ng-click='buildRawTab()'>Submit</button> -->
+      </form>
+
+      <form class='individual-notes-form col-md-2 form-horizontal' ng-model='inputForm.inputForm' ng-submit='lookupChord()'>
+        <label>
+          <span ng-hide='edit'>Strings:</span>
+          <span class='edit-input' ng-show='edit'>EDIT!!!</span>
+        </label>
+
+        <div class='form-group'>
+          <label class="col-md-1 control-label">e:</label>
+          <div class='col-md-6'>
+            <input class="form-control" type="text" ng-model="inputForm.stringInput[5]" maxlength='2'></input>
+          </div>
+        </div>
+        <div class='form-group'>
+          <label class="col-md-1 control-label">B:</label>
+          <div class='col-md-6'>
+            <input class="form-control" type="text" ng-model="inputForm.stringInput[4]" maxlength='2'></input>
+          </div>
+        </div>
+        <div class='form-group'>
+          <label class="col-md-1 control-label">G:</label>
+          <div class='col-md-6'>
+            <input class="form-control" type="text" ng-model="inputForm.stringInput[3]" maxlength='2'></input>
+          </div>
+        </div>
+        <div class='form-group'>
+          <label class="col-md-1 control-label">D:</label>
+          <div class='col-md-6'>
+            <input class="form-control" type="text" ng-model="inputForm.stringInput[2]" maxlength='2'></input>
+          </div>
+        </div>
+        <div class='form-group'>
+          <label class="col-md-1 control-label">A:</label>
+          <div class='col-md-6'>
+            <input class="form-control" type="text" ng-model="inputForm.stringInput[1]" maxlength='2'></input>
+          </div>
+        </div>
+        <div class='form-group'>
+          <label class="col-md-1 control-label">E:</label>
+          <div class='col-md-6'>
+            <input class="form-control" type="text" ng-model="inputForm.stringInput[0]" maxlength='2'></input>
+          </div>
+        </div>
+      </form>
+
+      <div class="input-buttons col-md-3">
+        <div class='form-group'>
+          <button ng-hide='edit' class='btn btn-default' ng-click="addTab()">Add Tab!</button>
+          <button ng-show='edit' class='btn btn-warning' ng-click="saveEditTab()">SAVE EDIT!</button>
+        </div>
+
+        <div class='break-ct form-group form-inline'>
+          <button class='btn btn-default' ng-click="addMeasure()">Add Break!</button>
+          <input class="form-control" min='0' max='30' type="number" placeholder='Count' value="2" ng-model="inputForm.breakCt" maxlength="2">
+        </div>
+
+        <div class='form-group'>
+          <button class='btn btn-default' ng-click="resetAll()">Reset!</button>
+        </div>
+      </div>
+
+      <div class='filtered-chords col-md-5'>
+        <table class='table table-bordered'>
+          <thead>
+            <th>Name <span ng-show='inputForm.chordInput'>({{(chordLib | filter:inputForm.chordInput).length}} Found)</span></th>
+            <th>Chord</th>
+          </thead>
+          <tbody>
+            <tr ng-click='clickedFilteredChord(match)' ng-show='inputForm.chordInput' ng-repeat='match in chordLib | filter:inputForm.chordInput'>
+              <td class='col-md-6'>{{match.name}}</td>
+              <td class='col-md-6 chord'>{{match.tab.join(' ')}}</td>
+            </tr>
+          </tbody>
         </table>
       </div>
+    </div>
 
-      <div class="tab-build col-md-9">
-        <h1>Build a Tab!</h1>
+    <div class="tab-body">
 
-        <div class="tab-input row">
-          <div class="col-md-2">
-            <label class="str-name">Chord:</label><br>
-            <input class="chord-input" ng-keypress='pressEnter($event)' ng-model="chord" maxlength="6"></input>
-          </div>
+      <ul class="user-tab">
+        <li>&nbsp;</li>
+        <li>e|</li>
+        <li>B|</li>
+        <li>G|</li>
+        <li>D|</li>
+        <li>A|</li>
+        <li>E|</li>
+      </ul>
 
-          <fieldset class="col-md-2">
-            <label class="str-name">
-              <span ng-hide="edit">Strings:</span>
-              <span class="edit-input" ng-show="edit">EDIT!!!</span>
-            </label><br>
-            <label class="str-name">e: </label>
-            <input type="text" ng-keypress='pressEnter($event)' class="string-input" ng-model="stringInput['eH']" maxlength="2"></input>
-            <br>
-            <label class="str-name">B: </label>
-            <input type="text" ng-keypress='pressEnter($event)' class="string-input" ng-model="stringInput['b']" maxlength="2"></input>
-            <br>
-            <label class="str-name">G: </label>
-            <input type="text" ng-keypress='pressEnter($event)' class="string-input" ng-model="stringInput['g']" maxlength="2"></input>
-            <br>
-            <label class="str-name">D: </label>
-            <input type="text" ng-keypress='pressEnter($event)' class="string-input" ng-model="stringInput['d']" maxlength="2"></input>
-            <br>
-            <label class="str-name">A: </label>
-            <input type="text" ng-keypress='pressEnter($event)' class="string-input" ng-model="stringInput['a']" maxlength="2"></input>
-            <br>
-            <label class="str-name">E: </label>
-            <input type="text" ng-keypress='pressEnter($event)' class="string-input" ng-model="stringInput['eL']" maxlength="2"></input>
-          </fieldset>
-
-          <div class="tab-preview col-md-8">
-            <fieldset id="buttons">
-              <button id="add-tab"  ng-click="addTab('chord')">Add Tab!</button>
-              <label>(Enter)</label>
-              <br>
-              <button id="add-break" ng-click="addTab('break')">Add Break!</button>
-              <input class="break-ct" min='0' max='30' type="number" value="2" ng-model="breakCt" maxlength="2">
-              <label>Count</label>
-              <br>
-              <button id="add-meas" ng-click="addTab('measure')">Add Measure!</button>
-              <label>(Shift-M)</label>
-              <li><button id="reset" ng-click="resetAll()">Reset!</button></li>
-            </fieldset>
-          </div>
-        </div>
-
-        <div class="tab-body">
-          <div class='note-stem'>
-            <ul id='base-notes'>
-              <li>&nbsp;</li>
-              <li>e|--</li>
-              <li>B|--</li>
-              <li>G|--</li>
-              <li>D|--</li>
-              <li>A|--</li>
-              <li>E|--</li>
-            </ul>
-          </div>
-
-          <div class="tab-notes">
-            <ul class="user-tab" ng-repeat='tab in tabs'>
-              <li>{{tab.name}}</li>
-              <li>{{tab.eH}}</li>
-              <li>{{tab.b}}</li>
-              <li>{{tab.g}}</li>
-              <li>{{tab.d}}</li>
-              <li>{{tab.a}}</li>
-              <li>{{tab.eL}}</li>
-              <li>
-                <ul class='edit-icons'>
-                  <li class='note-insert' ng-click='insertTab();' title="Insert Chord"></li>
-                  <li class='note-edit'   ng-click='noteEdit()' title="Edit Chord"></li>
-                  <li class='note-delete' ng-click='deleteTab();' title="Delete Chord"></li>
-                </ul>
-              </li>
-              <li class='cxl-edit' ng-show="edit" ng-click='edit = false' title="Cancel Edit"></li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <ul class="user-tab" ng-repeat='tab in tabs'>
+        <li class='tab-name'>{{tab.chordInput}}</li>
+        <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[0] || spacer }}</li>
+        <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[1] || spacer }}</li>
+        <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[2] || spacer }}</li>
+        <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[3] || spacer }}</li>
+        <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[4] || spacer }}</li>
+        <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[5] || spacer }}</li>
+        <li>
+          <ul class='edit-icons'>
+            <li class='note-insert'       ng-click='insertTab();'    title="Insert Chord"></li>
+            <li class='note-edit'         ng-click='editTab()'       title="Edit Chord"></li>
+            <li class='note-delete'       ng-click='deleteTab();'    title="Delete Chord"></li>
+            <li class='note-measure-up'   ng-click='editMeasure(1);' title="Increase Measure"></li>
+            <li class='note-measure-down' ng-click='editMeasure(0);' title="Decrease Measure"></li>
+            <li class='measure-count'>({{tab.breakCt}})</li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
 
