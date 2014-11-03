@@ -30,7 +30,7 @@
   padding: 20px; }
   .tab-body .edit-icons {
     position: absolute;
-    top: 150px;
+    top: 140px;
     left: -6px;
     text-align: center;
     list-style: none;
@@ -69,15 +69,6 @@
         list-style: none; }
         .tab-body .tab-notes .user-tab:hover .edit-icons li {
           display: inline; }
-        .tab-body .tab-notes .user-tab:hover .edit-icons:after {
-          content: " ";
-          position: absolute;
-          top: -17px;
-          left: 1px;
-          width: 0;
-          height: 0;
-          border: 8px solid transparent;
-          border-bottom-color: #000; }
         .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert {
           color: #25ed1e; }
           .tab-body .tab-notes .user-tab:hover .edit-icons .note-insert:hover {

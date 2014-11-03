@@ -47,7 +47,7 @@
   padding: 20px;
   .edit-icons{
     position: absolute;
-    top: 150px;
+    top: 140px;
     left: -6px;
     text-align: center;
     list-style: none;
@@ -85,16 +85,17 @@
           font-size: 20px;
           list-style: none;
           li{ display: inline; }
-          &:after{
-            content: " ";
-            position: absolute;
-            top: -17px;
-            left: 1px;
-            width: 0;
-            height: 0;
-            border: 8px solid transparent;
-            border-bottom-color: #000;
-          }
+          // -------- Disabled ToolTip
+          // &:after{
+          //   content: " ";
+          //   position: absolute;
+          //   top: -17px;
+          //   left: 1px;
+          //   width: 0;
+          //   height: 0;
+          //   border: 8px solid transparent;
+          //   border-bottom-color: #000;
+          // }
 
           .note-insert{
             color: #25ed1e;
