@@ -11,13 +11,17 @@
   margin-bottom: 20px; }
   .filtered-chords table {
     border-bottom: 1px solid gray; }
+    .filtered-chords table tr:hover {
+      background: red; }
     .filtered-chords table td {
       padding: 2px 8px !important; }
   .filtered-chords .chord {
     font-family: 'courier'; }
 
 .input-buttons button {
-  width: 115px; }
+  min-width: 100px; }
+.input-buttons .break-ct input {
+  width: 100px; }
 
 .edit-input {
   color: #f00;
@@ -28,18 +32,6 @@
   min-height: 800px;
   border: 1px solid #000;
   padding: 20px; }
-  .tab-body .note-stem {
-    width: 32px;
-    float: left; }
-    .tab-body .note-stem #base-notes + #base-notes {
-      margin-top: 2px; }
-    .tab-body .note-stem #base-notes {
-      margin-top: 1px;
-      display: inline-block;
-      font-family: 'courier';
-      margin: 0;
-      padding: 0;
-      list-style: none; }
   .tab-body .edit-icons {
     position: absolute;
     top: 150px;
@@ -113,3 +105,19 @@
             color: #000; }
           .tab-body .tab-notes .user-tab:hover .edit-icons .note-delete:before {
             content: '\f00d'; }
+        .tab-body .tab-notes .user-tab:hover .edit-icons .note-measure-up {
+          color: #000; }
+          .tab-body .tab-notes .user-tab:hover .edit-icons .note-measure-up:hover {
+            color: #ba0000; }
+          .tab-body .tab-notes .user-tab:hover .edit-icons .note-measure-up:active {
+            color: #000; }
+          .tab-body .tab-notes .user-tab:hover .edit-icons .note-measure-up:before {
+            content: '\f062'; }
+        .tab-body .tab-notes .user-tab:hover .edit-icons .note-measure-down {
+          color: #000; }
+          .tab-body .tab-notes .user-tab:hover .edit-icons .note-measure-down:hover {
+            color: #ba0000; }
+          .tab-body .tab-notes .user-tab:hover .edit-icons .note-measure-down:active {
+            color: #000; }
+          .tab-body .tab-notes .user-tab:hover .edit-icons .note-measure-down:before {
+            content: '\f063'; }

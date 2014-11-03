@@ -15,7 +15,7 @@
 
 <body>
 
-  <div class='container' ng-app='guitarApp' ng-controller='ChordCtrl'>
+  <div class='container' ng-app='guitarApp' ng-controller='ChordCtrl' ng-keypress='pressEnter($event)'>
 
     <h1>Build a Tab!</h1>
 
@@ -23,7 +23,7 @@
       <form class='chord-builder-form col-md-2' ng-model='inputForm.inputForm' ng-submit='lookupChordTab()'>
         <div class='form-group'>
           <label class='control-label'>Chord:</label>
-          <input class='form-control' ng-change='lookupChordTab()' ng-model='inputForm.chordInput' maxlength='6'></input>
+          <input class='form-control' id='chord-input' ng-change='lookupChordTab()' ng-model='inputForm.chordInput' maxlength='6'></input>
         </div>
       </form>
 
@@ -72,40 +72,31 @@
       </form>
 
       <div class="input-buttons col-md-3">
-        <form class="col-md-12">
-          <div class='form-group'>
-            <button class='btn btn-default' ng-click="addTab('chord')">Add Tab!</button>
-            <label>(Enter)</label>
-          </div>
+        <div class='form-group'>
+          <button class='btn btn-default' ng-click="addTab('chord')">Add Tab!</button>
+          <label>(Enter)</label>
+        </div>
 
-          <div class='form-group'>
-            <button class='btn btn-default' ng-click="addTab('break')">Add Break!</button>
-            <input class="break-ct" min='0' max='30' type="number" value="2" ng-model="breakCt" maxlength="2">
-            <label>Count</label>
-          </div>
+        <div class='break-ct form-group form-inline'>
+          <button class='btn btn-default' ng-click="addMeasure()">Add Break!</button>
+          <input class="form-control" min='0' max='30' type="number" placeholder='Count' value="2" ng-model="inputForm.breakCt" maxlength="2">
+        </div>
 
-          <div class='form-group'>
-            <button class='btn btn-default' ng-click="addTab('measure')">Add Measure!</button>
-            <label>(Shift-M)</label>
-          </div>
-
-          <div class='form-group'>
-            <button class='btn btn-default' ng-click="resetAll()">Reset!</button>
-          </div>
-
-        </form>
+        <div class='form-group'>
+          <button class='btn btn-default' ng-click="resetAll()">Reset!</button>
+        </div>
       </div>
+
       <div class='filtered-chords col-md-5'>
-        <span ng-show='inputForm.chordInput'>Possible Chords: {{(chordLib | filter:inputForm.chordInput).length}}</span>
         <table class='table table-bordered'>
           <thead>
-            <th>Name</th>
+            <th>Name <span ng-show='inputForm.chordInput'>({{(chordLib | filter:inputForm.chordInput).length}} Found)</span></th>
             <th>Chord</th>
           </thead>
           <tbody>
-            <tr ng-click='updateChord(match)' ng-show='inputForm.chordInput' ng-repeat='match in chordLib | filter:inputForm.chordInput'>
-              <td>{{match.name}}</td>
-              <td class='chord'>{{match.tab.join(' ')}}</td>
+            <tr ng-click='clickedChord(match)' ng-show='inputForm.chordInput' ng-repeat='match in chordLib | filter:inputForm.chordInput'>
+              <td class='col-md-6'>{{match.name}}</td>
+              <td class='col-md-6 chord'>{{match.tab.join(' ')}}</td>
             </tr>
           </tbody>
         </table>
@@ -113,32 +104,33 @@
     </div>
 
     <div class="tab-body">
-      <div class='note-stem'>
-        <ul id='base-notes'>
-          <li>&nbsp;</li>
-          <li>e|--</li>
-          <li>B|--</li>
-          <li>G|--</li>
-          <li>D|--</li>
-          <li>A|--</li>
-          <li>E|--</li>
-        </ul>
-      </div>
 
       <div class="tab-notes">
+        <ul class="user-tab">
+          <li>&nbsp;</li>
+          <li>e|</li>
+          <li>B|</li>
+          <li>G|</li>
+          <li>D|</li>
+          <li>A|</li>
+          <li>E|</li>
+        </ul>
+
         <ul class="user-tab" ng-repeat='tab in tabs'>
-          <li>{{tab.name}}</li>
-          <li>{{tab.notes[0]}}</li>
-          <li>{{tab.notes[1]}}</li>
-          <li>{{tab.notes[2]}}</li>
-          <li>{{tab.notes[3]}}</li>
-          <li>{{tab.notes[4]}}</li>
-          <li>{{tab.notes[5]}}</li>
+          <li>{{printSpacing(tab.breakCt, '&nbsp;')}}{{tab.chordInput}}</li>
+          <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[0]}}</li>
+          <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[1]}}</li>
+          <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[2]}}</li>
+          <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[3]}}</li>
+          <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[4]}}</li>
+          <li>{{printSpacing(tab.breakCt)}}{{tab.stringInput[5]}}</li>
           <li>
             <ul class='edit-icons'>
               <li class='note-insert' ng-click='insertTab();' title="Insert Chord"></li>
               <li class='note-edit'   ng-click='noteEdit()' title="Edit Chord"></li>
               <li class='note-delete' ng-click='deleteTab();' title="Delete Chord"></li>
+              <li class='note-measure-up' ng-click='editMeasure(1);' title="Increase Measure"></li>
+              <li class='note-measure-down' ng-click='editMeasure(0);' title="Decrease Measure"></li>
             </ul>
           </li>
           <li class='cxl-edit' ng-show="edit" ng-click='edit = false' title="Cancel Edit"></li>
