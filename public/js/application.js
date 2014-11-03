@@ -59,7 +59,16 @@ guitarApp.controller('ChordCtrl', ['$scope', 'ChordLibrary', '$filter', function
   }
 
   $scope.editMeasure = function(num) {
-    num > 0 ? $scope.tabs[this.$index].breakCt += 1 : $scope.tabs[this.$index].breakCt -= 1;
+    if (num > 0) {
+      $scope.tabs[this.$index].breakCt += 1
+    } else if ($scope.tabs[this.$index].breakCt > 0) {
+      $scope.tabs[this.$index].breakCt -= 1;
+    }
+  }
+
+  $scope.deleteTab = function() {
+    var idx = this.$index;
+    $scope.tabs.splice(idx, 1);
   }
 
   $scope.clickedChord = function(choice) {
